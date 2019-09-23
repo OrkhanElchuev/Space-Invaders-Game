@@ -19,6 +19,16 @@ public class WaveConfigurations : ScriptableObject
     [SerializeField] float spawningRandomFactor = 1.0f;
 
     // Getters
+    public List<Transform> GetWaypoints()
+    {
+        var waveWaypoints = new List<Transform>();
+        foreach (Transform child in pathPrefab.transform)
+        {
+            waveWaypoints.Add(child);
+        }
+        return waveWaypoints;
+    }
+
     public GameObject GetEnemyPrefab()
     {
         return enemyPrefab;
@@ -28,7 +38,7 @@ public class WaveConfigurations : ScriptableObject
     {
         return periodBetweenSpawning;
     }
-
+  
     public float GetSpawnRandomFactor()
     {
         return spawningRandomFactor;
