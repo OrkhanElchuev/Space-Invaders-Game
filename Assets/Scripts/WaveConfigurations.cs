@@ -21,7 +21,7 @@ public class WaveConfigurations : ScriptableObject
     // Getters
     public List<Transform> GetWaypoints()
     {
-        var waveWaypoints = new List<Transform>();
+        List<Transform> waveWaypoints = new List<Transform>();
         foreach (Transform child in pathPrefab.transform)
         {
             waveWaypoints.Add(child);
@@ -34,22 +34,22 @@ public class WaveConfigurations : ScriptableObject
         return enemyPrefab;
     }
 
-    public float GetTimeBetweenSpawns()
+    public float GetPeriodBetweenSpawning()
     {
         return periodBetweenSpawning;
     }
   
-    public float GetSpawnRandomFactor()
+    public float GetSpawningRandomFactor()
     {
         return spawningRandomFactor;
     }
 
-    public int GetNumberOfEnemies()
+    public int GetQuantityOfEnemies()
     {
         return quantityOfEnemies;
     }
 
-    public float GetMoveSpeed()
+    public float GetMovingSpeedOfEnemies()
     {
         return movingSpeedOfEnemies;
     }

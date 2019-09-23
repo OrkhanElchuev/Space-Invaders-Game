@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1505675751801157302}
   - component: {fileID: 5845581837775119014}
   - component: {fileID: -2518895704718303807}
+  - component: {fileID: -6661125848723349966}
   m_Layer: 0
   m_Name: EnemyLVL4Prefab
   m_TagString: Untagged
@@ -95,3 +96,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthOfEnemy: 100
   scoreValue: 100
+--- !u!114 &-6661125848723349966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7186605708142880422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f202606f5b8d34ab6fffda713b861e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

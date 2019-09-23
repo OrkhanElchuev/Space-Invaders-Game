@@ -36,7 +36,7 @@ public class EnemyPath : MonoBehaviour
         {
             // Assign target position 
             Vector3 targetPosition = wayPoints[wayPointIndex].position;
-            float movementFrame = waveConfigurations.GetMoveSpeed() * Time.deltaTime;
+            float movementFrame = waveConfigurations.GetMovingSpeedOfEnemies() * Time.deltaTime;
             // Smoothly move towards targeted waypoint's position 
             transform.position = Vector2.MoveTowards
                 (transform.position, targetPosition, movementFrame);

@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\BackgroundScroll.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\EnemyPath.cs" />
+    <Compile Include="Assets\Scripts\EnemySpawning.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\WaveConfigurations.cs" />
     <Reference Include="Unity.Timeline.Editor">
