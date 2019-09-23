@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8226923523068297983}
   - component: {fileID: 6342691945407421110}
+  - component: {fileID: 1097864891458422640}
   m_Layer: 0
-  m_Name: EnemyLVL1
+  m_Name: EnemyLVL1Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,3 +81,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1097864891458422640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130180393625546766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60199d832d403164283425e1cf454942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthOfEnemy: 100
+  scoreValue: 100
