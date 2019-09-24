@@ -21,6 +21,12 @@ public class Player : MonoBehaviour
     private float yMin;
     private float yMax;
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        SetMovementLimitsForPlayer();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -56,6 +62,17 @@ public class Player : MonoBehaviour
             // Create a delay between next shot
             yield return new WaitForSeconds(laserShootingPeriod);
         }
+    }
+
+    // Setting boundaries for moving the object
+    private void SetMovementLimitsForPlayer()
+    {
+        float padding = 1.2f;
+        Camera gameCamera = Camera.main;
+        xMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x + padding;
+        xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - padding;
+        yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + padding;
+        yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - padding;
     }
 
     // Frame Rate independent 2D object moving function
