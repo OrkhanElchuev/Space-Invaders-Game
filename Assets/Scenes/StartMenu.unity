@@ -204,7 +204,7 @@ PrefabInstance:
     - target: {fileID: 3580952880755569495, guid: c306322d507ecb8478095792bcf38942,
         type: 3}
       propertyPath: m_Name
-      value: Game Canvas
+      value: GameCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 3580952880755569491, guid: c306322d507ecb8478095792bcf38942,
         type: 3}
@@ -310,6 +310,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580952880755569492, guid: c306322d507ecb8478095792bcf38942,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c306322d507ecb8478095792bcf38942, type: 3}
@@ -467,7 +472,7 @@ PrefabInstance:
     - target: {fileID: 2941146664065911890, guid: 2b3d0a3d4e3319943b65d3f4ae3a54c6,
         type: 3}
       propertyPath: m_Name
-      value: Game Camera
+      value: GameCamera
       objectReference: {fileID: 0}
     - target: {fileID: 2941146664065911982, guid: 2b3d0a3d4e3319943b65d3f4ae3a54c6,
         type: 3}
