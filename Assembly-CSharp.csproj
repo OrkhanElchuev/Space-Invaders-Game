@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\EnemySpawning.cs" />
     <Compile Include="Assets\Scripts\LaserDestroyer.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\PlayerLaser.cs" />
     <Compile Include="Assets\Scripts\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\WaveConfigurations.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
