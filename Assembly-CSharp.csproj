@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\EnemySpawning.cs" />
     <Compile Include="Assets\Scripts\LaserDestroyer.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\WaveConfigurations.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Orkhan/Desktop/Orkhan/GameDevelopment/unity/SpaceInvaders/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
