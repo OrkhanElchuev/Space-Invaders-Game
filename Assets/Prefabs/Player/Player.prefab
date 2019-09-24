@@ -93,8 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f77ac2f67d14e34bb1c6e462746581d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingSpeedOfPlayer: 20
-  laserSpeed: 20
+  movingSpeedOfPlayer: 25
+  laserSpeed: 25
   laserShootingPeriod: 0.1
   laserPrefab: {fileID: 5155953065652748526, guid: fb13206b5129d5649b7e0ef42ff35b0d,
     type: 3}

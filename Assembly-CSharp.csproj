@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\EnemyPath.cs" />
     <Compile Include="Assets\Scripts\EnemySpawning.cs" />
+    <Compile Include="Assets\Scripts\GameStatus.cs" />
     <Compile Include="Assets\Scripts\LaserDestroyer.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerLaser.cs" />
