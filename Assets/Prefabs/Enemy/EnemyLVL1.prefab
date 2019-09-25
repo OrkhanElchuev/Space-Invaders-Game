@@ -99,7 +99,7 @@ MonoBehaviour:
   scoreVal: 100
   minPeriodBetweenShots: 0.2
   maxPeriodBetweenShots: 3
-  enemyLaserObject: {fileID: 5155953065652748526, guid: fb13206b5129d5649b7e0ef42ff35b0d,
+  enemyLaserObject: {fileID: 5155953065652748526, guid: 3a25958310c085949817569623854c7b,
     type: 3}
   laserSpeed: 10
   deathVFX: {fileID: 8646174394457154511, guid: 5a5e2ba4e18022e4cb76dec5d7a8803c,

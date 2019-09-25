@@ -42,12 +42,12 @@ public class Player : MonoBehaviour
     private void Shoot()
     {
         // When space keyboard is pressed start shooting
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Attack"))
         {
             shootingCoroutine = StartCoroutine(ShootContinuously());
         }
         // If keyboard is released stop shooting
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Attack"))
         {
             StopCoroutine(shootingCoroutine);
         }
@@ -72,11 +72,12 @@ public class Player : MonoBehaviour
     private void SetMovementLimitsForPlayer()
     {
         float padding = 1.2f;
+        int yMaxPadding = 8;
         Camera gameCamera = Camera.main;
         xMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x + padding;
         xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - padding;
         yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + padding;
-        yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - padding;
+        yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - yMaxPadding;
     }
 
     // Destroy the Player object and execute explosion effect
