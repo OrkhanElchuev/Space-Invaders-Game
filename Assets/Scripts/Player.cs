@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
   private int maxHealthPoints = 5;
   private Transform HealthBar;
 
+  [SerializeField] GameObject PlayerInfo;
+
   [Header("Shooting")]
   [SerializeField] float laserSpeed = 10.0f;
   [SerializeField] float laserShootingPeriod = 0.2f;
@@ -21,7 +23,9 @@ public class Player : MonoBehaviour
   [Header("Particle Effect")]
   [SerializeField] GameObject deathVFXObject;
   [SerializeField] float durationOfExplosion = 1.0f;
-	[SerializeField] GameObject sceneLoaderObject;
+  [SerializeField] GameObject sceneLoaderObject;
+
+  private GameStatus gameStatus;
 
   private Coroutine shootingCoroutine;
 
@@ -32,6 +36,7 @@ public class Player : MonoBehaviour
 
   private void Awake()
   {
+    gameStatus = transform.parent.Find("GameStatus").GetComponent<GameStatus>();
     HealthBar = transform.parent.Find("GameCanvas").Find("HealthBar");
   }
 
@@ -53,12 +58,12 @@ public class Player : MonoBehaviour
   {
     for (int i = 0; i < healthPoints; i++)
     {
-        HealthBar.GetChild(i).GetComponent<Image>().enabled = true;
+      HealthBar.GetChild(i).GetComponent<Image>().enabled = true;
     }
 
-    for(int i = healthPoints; i < maxHealthPoints; i++)
+    for (int i = healthPoints; i < maxHealthPoints; i++)
     {
-        HealthBar.GetChild(i).GetComponent<Image>().enabled = false;
+      HealthBar.GetChild(i).GetComponent<Image>().enabled = false;
     }
   }
 
@@ -90,7 +95,7 @@ public class Player : MonoBehaviour
     {
       // Quaternion corresponds to "no rotatition" for instantiated object
       GameObject laser = Instantiate(playerLaserObject,
-       transform.position + new Vector3(0,1,0),
+       transform.position + new Vector3(0, 1, 0),
           Quaternion.identity) as GameObject;
       // Setting velocity for laser
       laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
@@ -105,10 +110,10 @@ public class Player : MonoBehaviour
     playerHealthPoints--;
     GetComponent<SpriteRenderer>().enabled = false;
     GetComponent<Player>().enabled = false;
-    if(shootingCoroutine != null)
-		{
-			StopCoroutine(shootingCoroutine);
-		}
+    if (shootingCoroutine != null)
+    {
+      StopCoroutine(shootingCoroutine);
+    }
     Invoke("Respawn", 0.6f);
     GameObject explosion = Instantiate(deathVFXObject, transform.position, transform.rotation);
     Destroy(explosion, durationOfExplosion);
@@ -116,17 +121,19 @@ public class Player : MonoBehaviour
     Destroy(collision.gameObject);
     if (playerHealthPoints <= 0)
     {
+      PlayerInfo.GetComponent<PlayerInfo>().SetScore(gameStatus.GetScore());
+      PlayerInfo.GetComponent<PlayerInfo>().SavePlayer();
       DestroyPlayer();
       sceneLoaderObject.GetComponent<SceneLoader>().LoadGameOver();
     }
   }
 
-private void Respawn()
-{
+  private void Respawn()
+  {
     GetComponent<SpriteRenderer>().enabled = true;
     GetComponent<Player>().enabled = true;
     transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0, 100));
-}
+  }
   // Setting boundaries for moving the object
   private void SetMovementLimitsForPlayer()
   {
