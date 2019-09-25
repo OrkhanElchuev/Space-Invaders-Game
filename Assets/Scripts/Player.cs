@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     // Headers for readability in unity
     [Header("Player Configurations")] 
     [SerializeField] float movingSpeedOfPlayer = 10.0f;
-    [SerializeField] int playerHealthPoints = 3;
+    [SerializeField] int playerHealthPoints = 4;
 
     [Header("Shooting")] 
     [SerializeField] float laserSpeed = 10.0f;

@@ -16,7 +16,6 @@ public class WaveConfigurations : ScriptableObject
     [SerializeField] int quantityOfEnemies = 5;
     [SerializeField] float movingSpeedOfEnemies = 1.0f;
     [SerializeField] float periodBetweenSpawning = 1.0f;
-    [SerializeField] float spawningRandomFactor = 1.0f;
 
     // Getters
     public List<Transform> GetWaypoints()
@@ -37,11 +36,6 @@ public class WaveConfigurations : ScriptableObject
     public float GetPeriodBetweenSpawning()
     {
         return periodBetweenSpawning;
-    }
-  
-    public float GetSpawningRandomFactor()
-    {
-        return spawningRandomFactor;
     }
 
     public int GetQuantityOfEnemies()

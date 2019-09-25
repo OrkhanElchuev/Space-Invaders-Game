@@ -18,5 +18,4 @@ MonoBehaviour:
     type: 3}
   quantityOfEnemies: 6
   movingSpeedOfEnemies: 4
-  periodBetweenSpawning: 0.7
-  spawningRandomFactor: 1
+  periodBetweenSpawning: 0.5
