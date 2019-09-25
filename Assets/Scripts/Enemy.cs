@@ -56,6 +56,30 @@ public class Enemy : MonoBehaviour
         enemyLaser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -laserSpeed);
     }
 
+    // Decrease Health of Enemy
+    private void ProcessHit(PlayerLaser laserDamage)
+    {
+        enemyHealthPoints -= laserDamage.GetDamage();
+        laserDamage.Hit();
+        // Destroy object when health <= 0
+        if (enemyHealthPoints <= 0)
+        {
+            DestroyEnemy();
+        }
+    }
+
+    // When player laser hits enemy deal damage
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        PlayerLaser laserDamage = collider.gameObject.GetComponent<PlayerLaser>();
+        // Avoid Null reference Exception
+        if (!laserDamage)
+        {
+            return;
+        }
+        ProcessHit(laserDamage);
+    }
+
     // Destroy the enemy object
     private void DestroyEnemy()
     {

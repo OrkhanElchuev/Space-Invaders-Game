@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 130180393625546766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.542, y: -0.072, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,16 +95,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60199d832d403164283425e1cf454942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealthPoints: 100
+  enemyHealthPoints: 300
   scoreVal: 100
   minPeriodBetweenShots: 0.2
   maxPeriodBetweenShots: 3
   enemyLaserObject: {fileID: 5155953065652748526, guid: 3a25958310c085949817569623854c7b,
     type: 3}
   laserSpeed: 10
-  deathVFX: {fileID: 8646174394457154511, guid: 5a5e2ba4e18022e4cb76dec5d7a8803c,
+  deathVFX: {fileID: 8646174394457154511, guid: 98bc0403d8077994f8e23556b76a7190,
     type: 3}
-  durationOfExplosion: 1
+  durationOfExplosion: 0.3
 --- !u!114 &5454514769300407376
 MonoBehaviour:
   m_ObjectHideFlags: 0

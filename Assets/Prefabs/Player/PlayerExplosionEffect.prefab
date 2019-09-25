@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 515873591920715645}
   - component: {fileID: 378581995353726880}
   m_Layer: 0
-  m_Name: ExplosionEffect
+  m_Name: PlayerExplosionEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8646174394457154511}
   serializedVersion: 6
-  lengthInSec: 0.2
+  lengthInSec: 0.1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0

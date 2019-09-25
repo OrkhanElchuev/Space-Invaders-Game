@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8844236224325071594}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.785, y: 0.939, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,8 +95,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60199d832d403164283425e1cf454942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthOfEnemy: 100
-  scoreValue: 100
+  enemyHealthPoints: 100
+  scoreVal: 100
+  minPeriodBetweenShots: 0.2
+  maxPeriodBetweenShots: 3
+  enemyLaserObject: {fileID: 0}
+  laserSpeed: 10
+  deathVFX: {fileID: 0}
+  durationOfExplosion: 1
 --- !u!114 &-1348924491535288139
 MonoBehaviour:
   m_ObjectHideFlags: 0
