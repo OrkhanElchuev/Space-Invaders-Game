@@ -52,5 +52,4 @@ public class EnemyPath : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }

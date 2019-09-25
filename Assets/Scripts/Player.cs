@@ -39,6 +39,12 @@ public class Player : MonoBehaviour
         Shoot();
     }
 
+    // Get player health (will be used for displaying)
+    public int GetHealth()
+    {
+        return playerHealthPoints;
+    }
+
     // Method for player shooting
     private void Shoot()
     {

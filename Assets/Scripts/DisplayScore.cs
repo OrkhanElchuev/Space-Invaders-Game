@@ -7,7 +7,7 @@ using TMPro;
 public class DisplayScore : MonoBehaviour
 {
     private TextMeshProUGUI scoreText;
-    GameStatus gameStatus;
+    private GameStatus gameStatus;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,5 @@ public class DisplayScore : MonoBehaviour
     {
         // Convert int to String and assign to Score Text
         scoreText.text = gameStatus.GetScore().ToString();
-        Debug.Log(gameStatus.GetScore());
     }
 }
