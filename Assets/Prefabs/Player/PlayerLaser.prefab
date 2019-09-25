@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -5876526580343108004}
   - component: {fileID: -3868284855811855859}
   - component: {fileID: -3772873477067013576}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7430602962b1404cb1c85f787789fef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 100
 --- !u!50 &-3772873477067013576
 Rigidbody2D:
   serializedVersion: 4
