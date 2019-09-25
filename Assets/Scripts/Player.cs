@@ -1,135 +1,181 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    // Configuration parameters
-    // Headers for readability in unity
-    [Header("Player Configurations")] 
-    [SerializeField] float movingSpeedOfPlayer = 10.0f;
-    [SerializeField] int playerHealthPoints = 3;
+  // Configuration parameters
+  // Headers for readability in unity
+  [Header("Player Configurations")]
+  [SerializeField] float movingSpeedOfPlayer = 10.0f;
+  [SerializeField] int playerHealthPoints = 4;
+  private int maxHealthPoints = 5;
+  private Transform HealthBar;
 
-    [Header("Shooting")] 
-    [SerializeField] float laserSpeed = 10.0f;
-    [SerializeField] float laserShootingPeriod = 0.2f;
-    [SerializeField] GameObject playerLaserObject;
+  [Header("Shooting")]
+  [SerializeField] float laserSpeed = 10.0f;
+  [SerializeField] float laserShootingPeriod = 0.2f;
+  [SerializeField] GameObject playerLaserObject;
 
-    [Header("Particle Effect")]
-    [SerializeField] GameObject deathVFXObject;
-    [SerializeField] float durationOfExplosion = 1.0f;
+  [Header("Particle Effect")]
+  [SerializeField] GameObject deathVFXObject;
+  [SerializeField] float durationOfExplosion = 1.0f;
 
-    private Coroutine shootingCoroutine;
+  private Coroutine shootingCoroutine;
 
-    private float xMin;
-    private float xMax;
-    private float yMin;
-    private float yMax;
+  private float xMin;
+  private float xMax;
+  private float yMin;
+  private float yMax;
 
-    // Start is called before the first frame update
-    void Start()
+  private void Awake()
+  {
+    HealthBar = transform.parent.Find("GameCanvas").Find("HealthBar");
+  }
+
+  // Start is called before the first frame update
+  void Start()
+  {
+    SetMovementLimitsForPlayer();
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+    MovePlayer();
+    Shoot();
+  }
+
+  // Show correct amount of health icons based on healthpoints
+  private void ShowHealthBarIcons(int healthPoints)
+  {
+    switch (healthPoints)
     {
-        SetMovementLimitsForPlayer();
+      case 5:
+        HealthBar.GetChild(0).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(1).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(2).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(3).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(4).GetComponent<Image>().enabled = true;
+        break;
+      case 4:
+        HealthBar.GetChild(0).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(1).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(2).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(3).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(4).GetComponent<Image>().enabled = false;
+        break;
+      case 3:
+        HealthBar.GetChild(0).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(1).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(2).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(3).GetComponent<Image>().enabled = false;
+        HealthBar.GetChild(4).GetComponent<Image>().enabled = false;
+        break;
+      case 2:
+        HealthBar.GetChild(0).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(1).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(2).GetComponent<Image>().enabled = false;
+        HealthBar.GetChild(3).GetComponent<Image>().enabled = false;
+        HealthBar.GetChild(4).GetComponent<Image>().enabled = false;
+        break;
+      case 1:
+        HealthBar.GetChild(0).GetComponent<Image>().enabled = true;
+        HealthBar.GetChild(1).GetComponent<Image>().enabled = false;
+        HealthBar.GetChild(2).GetComponent<Image>().enabled = false;
+        HealthBar.GetChild(3).GetComponent<Image>().enabled = false;
+        HealthBar.GetChild(4).GetComponent<Image>().enabled = false;
+        break;
+      default:
+        HealthBar.GetChild(0).GetComponent<Image>().enabled = false;
+        HealthBar.GetChild(1).GetComponent<Image>().enabled = false;
+        HealthBar.GetChild(2).GetComponent<Image>().enabled = false;
+        HealthBar.GetChild(3).GetComponent<Image>().enabled = false;
+        HealthBar.GetChild(4).GetComponent<Image>().enabled = false;
+        break;
     }
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
-        MovePlayer();
-        Shoot();
-    }
+  // Get player health (will be used for displaying)
+  public int GetHealth()
+  {
+    return playerHealthPoints;
+  }
 
-    // Get player health (will be used for displaying)
-    public int GetHealth()
+  // Method for player shooting
+  private void Shoot()
+  {
+    // When space keyboard is pressed start shooting
+    if (Input.GetButtonDown("Attack"))
     {
-        return playerHealthPoints;
+      shootingCoroutine = StartCoroutine(ShootContinuously());
     }
+    // If keyboard is released stop shooting
+    if (Input.GetButtonUp("Attack"))
+    {
+      StopCoroutine(shootingCoroutine);
+    }
+  }
 
-    // Method for player shooting
-    private void Shoot()
+  // To shoot while the key is pressed
+  IEnumerator ShootContinuously()
+  {
+    while (true)
     {
-        // When space keyboard is pressed start shooting
-        if (Input.GetButtonDown("Attack"))
-        {
-            shootingCoroutine = StartCoroutine(ShootContinuously());
-        }
-        // If keyboard is released stop shooting
-        if (Input.GetButtonUp("Attack"))
-        {
-            StopCoroutine(shootingCoroutine);
-        }
+      // Quaternion corresponds to "no rotatition" for instantiated object
+      GameObject laser = Instantiate(playerLaserObject, transform.position,
+          Quaternion.identity) as GameObject;
+      // Setting velocity for laser
+      laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+      // Create a delay between next shot
+      yield return new WaitForSeconds(laserShootingPeriod);
     }
+  }
 
-    // To shoot while the key is pressed
-    IEnumerator ShootContinuously()
+  // On collision of enemy or enemy bullet with player
+  private void OnTriggerEnter2D(Collider2D collision)
+  {
+    playerHealthPoints--;
+    ShowHealthBarIcons(playerHealthPoints);
+    Destroy(collision.gameObject);
+    if (playerHealthPoints <= 0)
     {
-        while (true)
-        {
-            // Quaternion corresponds to "no rotatition" for instantiated object
-            GameObject laser = Instantiate(playerLaserObject, transform.position,
-                Quaternion.identity) as GameObject;
-            // Setting velocity for laser
-            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
-            // Create a delay between next shot
-            yield return new WaitForSeconds(laserShootingPeriod);
-        }
+      DestroyPlayer();
     }
+  }
 
-    // On collision of laser with Player deal the damage
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        PlayerLaser laserDamage = collision.gameObject.GetComponent<PlayerLaser>();
-        // Avoid Null Reference Exception
-        if (!laserDamage)
-        {
-            return;
-        }
-        ProcessHit(laserDamage);
-    }
+  // Setting boundaries for moving the object
+  private void SetMovementLimitsForPlayer()
+  {
+    float padding = 1.2f;
+    int yMaxPadding = 8;
+    Camera gameCamera = Camera.main;
+    xMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x + padding;
+    xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - padding;
+    yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + padding;
+    yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - yMaxPadding;
+  }
 
-    // Decrement player Health Points
-    private void ProcessHit(PlayerLaser laserDamage)
-    {
-        playerHealthPoints -= laserDamage.GetDamage();
-        laserDamage.Hit();
-        // Destroy object when health <= 0
-        if (playerHealthPoints <= 0)
-        {
-            DestroyPlayer();
-        }
-    }
+  // Destroy the Player object and execute explosion effect
+  private void DestroyPlayer()
+  {
+    Destroy(gameObject);
+    GameObject explosion = Instantiate(deathVFXObject, transform.position, transform.rotation);
+    Destroy(explosion, durationOfExplosion);
+  }
 
-    // Setting boundaries for moving the object
-    private void SetMovementLimitsForPlayer()
-    {
-        float padding = 1.2f;
-        int yMaxPadding = 8;
-        Camera gameCamera = Camera.main;
-        xMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x + padding;
-        xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - padding;
-        yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + padding;
-        yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - yMaxPadding;
-    }
-
-    // Destroy the Player object and execute explosion effect
-    private void DestroyPlayer()
-    {
-        Destroy(gameObject);
-        GameObject explosion = Instantiate(deathVFXObject, transform.position, transform.rotation);
-        Destroy(explosion, durationOfExplosion);
-    }
-
-    // Frame Rate independent 2D object moving function
-    private void MovePlayer()
-    {
-        // Horizontal and Vertical allows moving object with WASD or arrows
-        float deltaX = Input.GetAxis("Horizontal") * Time.deltaTime * movingSpeedOfPlayer;
-        float deltaY = Input.GetAxis("Vertical") * Time.deltaTime * movingSpeedOfPlayer;
-        // Getting X and Y positions, clamping Horizontal and Vertical movement
-        // to avoid leaving the boundaries of screen
-        float newXPosition = Mathf.Clamp(transform.position.x + deltaX, xMin, xMax);
-        float newYPosition = Mathf.Clamp(transform.position.y + deltaY, yMin, yMax);
-        // Setting X and Y positions to the object
-        transform.position = new Vector2(newXPosition, newYPosition);
-    }
+  // Frame Rate independent 2D object moving function
+  private void MovePlayer()
+  {
+    // Horizontal and Vertical allows moving object with WASD or arrows
+    float deltaX = Input.GetAxis("Horizontal") * Time.deltaTime * movingSpeedOfPlayer;
+    float deltaY = Input.GetAxis("Vertical") * Time.deltaTime * movingSpeedOfPlayer;
+    // Getting X and Y positions, clamping Horizontal and Vertical movement
+    // to avoid leaving the boundaries of screen
+    float newXPosition = Mathf.Clamp(transform.position.x + deltaX, xMin, xMax);
+    float newYPosition = Mathf.Clamp(transform.position.y + deltaY, yMin, yMax);
+    // Setting X and Y positions to the object
+    transform.position = new Vector2(newXPosition, newYPosition);
+  }
 }
