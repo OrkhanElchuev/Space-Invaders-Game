@@ -9,10 +9,10 @@ public class Player : MonoBehaviour
     [Header("Player Configurations")] 
     [SerializeField] float movingSpeedOfPlayer = 10.0f;
 
-    [Header("Laser")] 
+    [Header("Shooting")] 
     [SerializeField] float laserSpeed = 10.0f;
     [SerializeField] float laserShootingPeriod = 0.2f;
-    [SerializeField] GameObject laserObject;
+    [SerializeField] GameObject playerLaserObject;
 
     [Header("Particle Effect")]
     [SerializeField] GameObject deathVFX;
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         while (true)
         {
             // Quaternion corresponds to "no rotatition" for instantiated object
-            GameObject laser = Instantiate(laserObject, transform.position,
+            GameObject laser = Instantiate(playerLaserObject, transform.position,
                 Quaternion.identity) as GameObject;
             // Setting velocity for laser
             laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
