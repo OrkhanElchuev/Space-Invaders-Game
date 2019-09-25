@@ -102,22 +102,35 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void DisablePlayerComponents()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Player>().enabled = false;
+        GetComponent<PolygonCollider2D>().enabled = false;
+    }
+
+	private void RunExplosionEffect()
+	{
+		GameObject explosion = Instantiate(deathVFXObject, transform.position, 
+		transform.rotation);
+        Destroy(explosion, durationOfExplosion);
+	}
+
     // On collision of enemy or enemy bullet with player
     private void OnTriggerEnter2D(Collider2D collision)
     {
         playerHealthPoints--;
-        GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<Player>().enabled = false;
-		GetComponent<PolygonCollider2D>().enabled = false;
-
+		DisablePlayerComponents();
+		// If shooting is pressed before the player is dead
         if (shootingCoroutine != null)
         {
+			// Stop shooting coroutine until the next shooting input from user
             StopCoroutine(shootingCoroutine);
         }
+		// Delay for Respawn and ColliderEnabling methods
         Invoke("Respawn", 0.6f);
-		Invoke("ColliderDelay", 2.0f);
-        GameObject explosion = Instantiate(deathVFXObject, transform.position, transform.rotation);
-        Destroy(explosion, durationOfExplosion);
+        Invoke("ColliderEnabling", 2.0f);
+        RunExplosionEffect();
         ShowHealthBarIcons(playerHealthPoints);
         Destroy(collision.gameObject);
         if (playerHealthPoints <= 0)
@@ -127,13 +140,19 @@ public class Player : MonoBehaviour
         }
     }
 
-	// Reset values after respawning		
+    private void ColliderEnabling()
+    {
+        // Enable collider polygon on Player
+        GetComponent<PolygonCollider2D>().enabled = true;
+    }
+
+    // Reset values after respawning		
     private void Respawn()
     {
-		// Enable Sprite and Player 
+        // Enable Sprite and Player 
         GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<Player>().enabled = true;
-		// Respawn player in the middle of the screen
+        // Respawn player in the middle of the screen
         transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0, 100));
     }
 
