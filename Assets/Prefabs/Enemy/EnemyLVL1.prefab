@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealthPoints: 300
-  scoreVal: 100
+  scoreValue: 100
   minPeriodBetweenShots: 0.2
   maxPeriodBetweenShots: 3
   enemyLaserObject: {fileID: 5155953065652748526, guid: 3a25958310c085949817569623854c7b,

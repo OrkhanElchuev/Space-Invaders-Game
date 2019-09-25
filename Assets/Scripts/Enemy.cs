@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     [Header("Enemy Stats")]
     [SerializeField] int enemyHealthPoints = 100;
-    [SerializeField] int scoreVal = 100;
+    [SerializeField] int scoreValue = 100;
 
     [Header("Shooting")]
     [SerializeField] float minPeriodBetweenShots = 0.2f;
@@ -18,7 +18,6 @@ public class Enemy : MonoBehaviour
     [Header("Explosion Effect")]
     [SerializeField] GameObject deathVFX;
     [SerializeField] float durationOfExplosion = 1.0f;
-
 
     // Start is called before the first frame update
     void Start()
@@ -84,7 +83,7 @@ public class Enemy : MonoBehaviour
     private void DestroyEnemy()
     {
         // Add score value to score field
-        FindObjectOfType<GameStatus>().AddToScore(scoreVal);
+        FindObjectOfType<GameStatus>().AddToScore(scoreValue);
         Destroy(gameObject);
         // When enemy destroyed create explosion effect
         GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
