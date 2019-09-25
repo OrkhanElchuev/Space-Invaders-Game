@@ -9,10 +9,14 @@ public class Player : MonoBehaviour
     [Header("Player Configurations")] 
     [SerializeField] float movingSpeedOfPlayer = 10.0f;
 
-    [Header("Projectile")] 
+    [Header("Laser")] 
     [SerializeField] float laserSpeed = 10.0f;
     [SerializeField] float laserShootingPeriod = 0.2f;
-    [SerializeField] GameObject laserPrefab;
+    [SerializeField] GameObject laserObject;
+
+    [Header("Particle Effect")]
+    [SerializeField] GameObject deathVFX;
+    [SerializeField] float durationOfExplosion = 1.0f;
 
     Coroutine shootingCoroutine;
 
@@ -55,7 +59,7 @@ public class Player : MonoBehaviour
         while (true)
         {
             // Quaternion corresponds to "no rotatition" for instantiated object
-            GameObject laser = Instantiate(laserPrefab, transform.position,
+            GameObject laser = Instantiate(laserObject, transform.position,
                 Quaternion.identity) as GameObject;
             // Setting velocity for laser
             laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
@@ -75,16 +79,24 @@ public class Player : MonoBehaviour
         yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - padding;
     }
 
+    // Destroy the Player object and execute explosion effect
+    private void DestroyPlayer()
+    {
+        Destroy(gameObject);
+        GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
+        Destroy(explosion, durationOfExplosion);
+    }
+
     // Frame Rate independent 2D object moving function
     private void MovePlayer()
     {
         // Horizontal and Vertical allows moving object with WASD or arrows
-        var deltaX = Input.GetAxis("Horizontal") * Time.deltaTime * movingSpeedOfPlayer;
-        var deltaY = Input.GetAxis("Vertical") * Time.deltaTime * movingSpeedOfPlayer;
+        float deltaX = Input.GetAxis("Horizontal") * Time.deltaTime * movingSpeedOfPlayer;
+        float deltaY = Input.GetAxis("Vertical") * Time.deltaTime * movingSpeedOfPlayer;
         // Getting X and Y positions, clamping Horizontal and Vertical movement
         // to avoid leaving the boundaries of screen
-        var newXPosition = Mathf.Clamp(transform.position.x + deltaX, xMin, xMax);
-        var newYPosition = Mathf.Clamp(transform.position.y + deltaY, yMin, yMax);
+        float newXPosition = Mathf.Clamp(transform.position.x + deltaX, xMin, xMax);
+        float newYPosition = Mathf.Clamp(transform.position.y + deltaY, yMin, yMax);
         // Setting X and Y positions to the object
         transform.position = new Vector2(newXPosition, newYPosition);
     }

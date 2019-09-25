@@ -6,11 +6,12 @@ public class GameStatus : MonoBehaviour
 {
     private int playerScore = 0;
 
+    // Awake is called when the script instance is being loaded
     private void Awake()
     {
         SetUpSingleton();
     }
-
+    
     private void SetUpSingleton()
     {
         // If there are more than one GameStatus objects destroy itself
