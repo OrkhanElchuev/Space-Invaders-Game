@@ -95,13 +95,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingSpeedOfPlayer: 25
+  playerHealthPoints: 300
   laserSpeed: 25
   laserShootingPeriod: 0.1
   playerLaserObject: {fileID: 5155953065652748526, guid: fb13206b5129d5649b7e0ef42ff35b0d,
     type: 3}
-  deathVFX: {fileID: 8646174394457154511, guid: 5a5e2ba4e18022e4cb76dec5d7a8803c,
+  deathVFXObject: {fileID: 8646174394457154511, guid: 5a5e2ba4e18022e4cb76dec5d7a8803c,
     type: 3}
-  durationOfExplosion: 1
+  durationOfExplosion: 0.4
 --- !u!60 &7486719126229937694
 PolygonCollider2D:
   m_ObjectHideFlags: 0

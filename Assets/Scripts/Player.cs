@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     // Headers for readability in unity
     [Header("Player Configurations")] 
     [SerializeField] float movingSpeedOfPlayer = 10.0f;
+    [SerializeField] int playerHealthPoints = 3;
 
     [Header("Shooting")] 
     [SerializeField] float laserSpeed = 10.0f;
@@ -15,10 +16,10 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject playerLaserObject;
 
     [Header("Particle Effect")]
-    [SerializeField] GameObject deathVFX;
+    [SerializeField] GameObject deathVFXObject;
     [SerializeField] float durationOfExplosion = 1.0f;
 
-    Coroutine shootingCoroutine;
+    private Coroutine shootingCoroutine;
 
     private float xMin;
     private float xMax;
@@ -68,6 +69,30 @@ public class Player : MonoBehaviour
         }
     }
 
+    // On collision of laser with Player deal the damage
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PlayerLaser laserDamage = collision.gameObject.GetComponent<PlayerLaser>();
+        // Avoid Null Reference Exception
+        if (!laserDamage)
+        {
+            return;
+        }
+        ProcessHit(laserDamage);
+    }
+
+    // Decrement player Health Points
+    private void ProcessHit(PlayerLaser laserDamage)
+    {
+        playerHealthPoints -= laserDamage.GetDamage();
+        laserDamage.Hit();
+        // Destroy object when health <= 0
+        if (playerHealthPoints <= 0)
+        {
+            DestroyPlayer();
+        }
+    }
+
     // Setting boundaries for moving the object
     private void SetMovementLimitsForPlayer()
     {
@@ -84,7 +109,7 @@ public class Player : MonoBehaviour
     private void DestroyPlayer()
     {
         Destroy(gameObject);
-        GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
+        GameObject explosion = Instantiate(deathVFXObject, transform.position, transform.rotation);
         Destroy(explosion, durationOfExplosion);
     }
 
