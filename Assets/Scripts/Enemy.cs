@@ -55,4 +55,15 @@ public class Enemy : MonoBehaviour
         // -laserSpeed to shoot downwards
         enemyLaser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -laserSpeed);
     }
+
+    // Destroy the enemy object
+    private void DestroyEnemy()
+    {
+        // Add score value to score field
+        FindObjectOfType<GameStatus>().AddToScore(scoreVal);
+        Destroy(gameObject);
+        // When enemy destroyed create explosion effect
+        GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
+        Destroy(explosion, durationOfExplosion);
+    }
 }
