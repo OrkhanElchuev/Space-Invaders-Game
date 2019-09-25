@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7657701513247657990}
   - component: {fileID: 7657701513247657988}
   - component: {fileID: 7486719126229937694}
-  - component: {fileID: 14783582}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -96,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingSpeedOfPlayer: 25
-  playerHealthPoints: 300
+  playerHealthPoints: 4
   laserSpeed: 25
   laserShootingPeriod: 0.1
   playerLaserObject: {fileID: 5155953065652748526, guid: fb13206b5129d5649b7e0ef42ff35b0d,
@@ -151,21 +150,3 @@ PolygonCollider2D:
       - {x: 0.39208502, y: -0.22314072}
       - {x: 0.45499998, y: -0.265}
       - {x: 0.47285962, y: -0.23285994}
---- !u!114 &14783582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7657701513247657991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84fb4c674dd36ba4e8b5c5d1bda112d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfHealthSprites: 4
-  healthSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
