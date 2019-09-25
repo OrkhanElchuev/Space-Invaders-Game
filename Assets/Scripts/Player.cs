@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     // Headers for readability in unity
     [Header("Player Configurations")]
     [SerializeField] float movingSpeedOfPlayer = 10.0f;
-    [SerializeField] int playerHealthPoints = 4;
+    private int playerHealthPoints = 4;
     private int maxHealthPoints = 5;
     private Transform HealthBar;
 
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     [Header("Particle Effect")]
     [SerializeField] GameObject deathVFXObject;
-    [SerializeField] float durationOfExplosion = 1.0f;
+    private float durationOfExplosion = 0.4f;
     [SerializeField] GameObject sceneLoaderObject;
 
     private Coroutine shootingCoroutine;
@@ -109,6 +109,7 @@ public class Player : MonoBehaviour
         GetComponent<PolygonCollider2D>().enabled = false;
     }
 
+	// Execute Explosion Effect
 	private void RunExplosionEffect()
 	{
 		GameObject explosion = Instantiate(deathVFXObject, transform.position, 
