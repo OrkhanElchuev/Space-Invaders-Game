@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private int playerHealthPoints = 4;
     private int maxHealthPoints = 5;
     private Transform HealthBar;
+    [SerializeField] GameObject PlayerInfo;
 
     [Header("Shooting")]
     [SerializeField] float laserSpeed = 10.0f;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     private float durationOfExplosion = 0.4f;
     [SerializeField] GameObject sceneLoaderObject;
 
+    private GameStatus gameStatus;
     private Coroutine shootingCoroutine;
 
     private float xMin;
@@ -33,7 +35,7 @@ public class Player : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        // Find HealthBar and assign it to local variable : HealthBar
+        gameStatus = transform.parent.Find("GameStatus").GetComponent<GameStatus>();
         HealthBar = transform.parent.Find("GameCanvas").Find("HealthBar");
     }
 
@@ -130,12 +132,13 @@ public class Player : MonoBehaviour
         }
 		// Delay for Respawn and ColliderEnabling methods
         Invoke("Respawn", 0.6f);
-        Invoke("ColliderEnabling", 2.0f);
+        Invoke("ColliderEnabling", 1.0f);
         RunExplosionEffect();
         ShowHealthBarIcons(playerHealthPoints);
         Destroy(collision.gameObject);
         if (playerHealthPoints <= 0)
-        {
+        {   
+            FindObjectOfType<GameStatus>().AddToScore();
             DestroyPlayer();
             sceneLoaderObject.GetComponent<SceneLoader>().LoadGameOver();
         }
