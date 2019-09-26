@@ -95,10 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60199d832d403164283425e1cf454942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealthPoints: 300
+  enemyHealthPoints: 200
   scoreValue: 100
-  minPeriodBetweenShots: 1
-  maxPeriodBetweenShots: 5
+  minPeriodBetweenShots: 2
+  maxPeriodBetweenShots: 6
   enemyLaserObject: {fileID: 5155953065652748526, guid: 3a25958310c085949817569623854c7b,
     type: 3}
   laserSpeed: 6

@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
     private float durationOfExplosion = 0.4f;
     [SerializeField] GameObject sceneLoaderObject;
 
-    private GameStatus gameStatus;
     private Coroutine shootingCoroutine;
 
     private float xMin;
@@ -35,7 +34,6 @@ public class Player : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        gameStatus = transform.parent.Find("GameStatus").GetComponent<GameStatus>();
         HealthBar = transform.parent.Find("GameCanvas").Find("HealthBar");
     }
 
@@ -138,7 +136,6 @@ public class Player : MonoBehaviour
         Destroy(collision.gameObject);
         if (playerHealthPoints <= 0)
         {   
-            FindObjectOfType<GameStatus>().AddToScore();
             DestroyPlayer();
             sceneLoaderObject.GetComponent<SceneLoader>().LoadGameOver();
         }

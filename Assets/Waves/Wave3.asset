@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80ca351af34e22243aed496eea837d56, type: 3}
-  m_Name: Wave2
+  m_Name: Wave3
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 130180393625546766, guid: cd91318dbc77470439cb78ddb7024b19,
     type: 3}
@@ -18,4 +18,4 @@ MonoBehaviour:
     type: 3}
   quantityOfEnemies: 10
   movingSpeedOfEnemies: 4
-  periodBetweenSpawning: 1.2
+  periodBetweenSpawning: 1

@@ -95,14 +95,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60199d832d403164283425e1cf454942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealthPoints: 100
+  enemyHealthPoints: 300
   scoreValue: 200
-  minPeriodBetweenShots: 0.2
-  maxPeriodBetweenShots: 3
-  enemyLaserObject: {fileID: 0}
-  laserSpeed: 10
-  deathVFX: {fileID: 0}
-  durationOfExplosion: 1
+  minPeriodBetweenShots: 1
+  maxPeriodBetweenShots: 4
+  enemyLaserObject: {fileID: 5155953065652748526, guid: 818c65c8ce394e14b89e3cbcdee9093e,
+    type: 3}
+  laserSpeed: 8
+  deathVFX: {fileID: 8646174394457154511, guid: 98bc0403d8077994f8e23556b76a7190,
+    type: 3}
+  durationOfExplosion: 0.3
 --- !u!114 &-1348924491535288139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +127,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
