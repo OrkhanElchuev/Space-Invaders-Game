@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private int playerHealthPoints = 4;
     private int maxHealthPoints = 5;
     private Transform HealthBar;
+
     [SerializeField] GameObject PlayerInfo;
 
     [Header("Shooting")]
@@ -24,6 +25,8 @@ public class Player : MonoBehaviour
     private float durationOfExplosion = 0.4f;
     [SerializeField] GameObject sceneLoaderObject;
 
+    private GameStatus gameStatus;
+
     private Coroutine shootingCoroutine;
 
     private float xMin;
@@ -31,9 +34,9 @@ public class Player : MonoBehaviour
     private float yMin;
     private float yMax;
 
-    // Awake is called when the script instance is being loaded
     private void Awake()
     {
+        gameStatus = transform.parent.Find("GameStatus").GetComponent<GameStatus>();
         HealthBar = transform.parent.Find("GameCanvas").Find("HealthBar");
     }
 
@@ -57,7 +60,6 @@ public class Player : MonoBehaviour
         {
             HealthBar.GetChild(i).GetComponent<Image>().enabled = true;
         }
-
         for (int i = healthPoints; i < maxHealthPoints; i++)
         {
             HealthBar.GetChild(i).GetComponent<Image>().enabled = false;
@@ -70,7 +72,6 @@ public class Player : MonoBehaviour
         return playerHealthPoints;
     }
 
-    // Method for player shooting
     private void Shoot()
     {
         // When space keyboard is pressed start shooting
@@ -85,23 +86,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    // To shoot while the key is pressed
-    IEnumerator ShootContinuously()
-    {
-        while (true)
-        {
-            // Create laser object when player shoots
-            // + new Vector3(0,1,0) for shifting laser projectile up
-            GameObject laser = Instantiate(playerLaserObject,
-             transform.position + new Vector3(0, 1, 0),
-                Quaternion.identity) as GameObject;
-            // Setting velocity for laser
-            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
-            // Create a delay between next shot
-            yield return new WaitForSeconds(laserShootingPeriod);
-        }
-    }
-
     private void DisablePlayerComponents()
     {
         GetComponent<SpriteRenderer>().enabled = false;
@@ -109,33 +93,27 @@ public class Player : MonoBehaviour
         GetComponent<PolygonCollider2D>().enabled = false;
     }
 
-	// Execute Explosion Effect
-	private void RunExplosionEffect()
-	{
-		GameObject explosion = Instantiate(deathVFXObject, transform.position, 
-		transform.rotation);
-        Destroy(explosion, durationOfExplosion);
-	}
-
     // On collision of enemy or enemy bullet with player
     private void OnTriggerEnter2D(Collider2D collision)
     {
         playerHealthPoints--;
-		DisablePlayerComponents();
-		// If shooting is pressed before the player is dead
+        DisablePlayerComponents();
+        // If shooting is pressed before the player is dead
         if (shootingCoroutine != null)
         {
-			// Stop shooting coroutine until the next shooting input from user
+            // Stop shooting coroutine until the next shooting input from user
             StopCoroutine(shootingCoroutine);
         }
-		// Delay for Respawn and ColliderEnabling methods
+        // Delay for Respawn and ColliderEnabling methods
         Invoke("Respawn", 0.6f);
         Invoke("ColliderEnabling", 1.0f);
         RunExplosionEffect();
         ShowHealthBarIcons(playerHealthPoints);
         Destroy(collision.gameObject);
         if (playerHealthPoints <= 0)
-        {   
+        {
+            PlayerInfo.GetComponent<PlayerInfo>().SetScore(gameStatus.GetScore());
+            PlayerInfo.GetComponent<PlayerInfo>().SavePlayer();
             DestroyPlayer();
             sceneLoaderObject.GetComponent<SceneLoader>().LoadGameOver();
         }
@@ -156,6 +134,33 @@ public class Player : MonoBehaviour
         // Respawn player in the middle of the screen
         transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0, 100));
     }
+
+
+    // Execute Explosion Effect
+    private void RunExplosionEffect()
+    {
+        GameObject explosion = Instantiate(deathVFXObject, transform.position,
+        transform.rotation);
+        Destroy(explosion, durationOfExplosion);
+    }
+
+    // To shoot while the key is pressed
+    IEnumerator ShootContinuously()
+    {
+        while (true)
+        {
+            // Create laser object when player shoots
+            // + new Vector3(0,1,0) for shifting laser projectile up
+            GameObject laser = Instantiate(playerLaserObject,
+             transform.position + new Vector3(0, 1, 0),
+                Quaternion.identity) as GameObject;
+            // Setting velocity for laser
+            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+            // Create a delay between next shot
+            yield return new WaitForSeconds(laserShootingPeriod);
+        }
+    }
+
 
     // Setting boundaries for moving the object
     private void SetMovementLimitsForPlayer()

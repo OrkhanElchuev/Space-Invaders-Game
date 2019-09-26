@@ -6,20 +6,20 @@ using TMPro;
 
 public class DisplayScore : MonoBehaviour
 {
-    private TextMeshProUGUI scoreText;
-    private GameStatus gameStatus;
+  private TextMeshProUGUI scoreText;
+  private GameStatus gameStatus;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        scoreText = GetComponent<TextMeshProUGUI>();
-        gameStatus = FindObjectOfType<GameStatus>();
-    }
+  // Start is called before the first frame update
+  void Start()
+  {
+    scoreText = GetComponent<TextMeshProUGUI>();
+    gameStatus = FindObjectOfType<GameStatus>();
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // Convert int to String and assign to Score Text
-        scoreText.text = gameStatus.GetScore().ToString();
-    }
+  // Update is called once per frame
+  void Update()
+  {
+    // Convert int to String and assign to Score Text
+    scoreText.text = gameStatus.GetScore().ToString();
+  }
 }
