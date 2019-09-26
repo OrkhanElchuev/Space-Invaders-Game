@@ -6,6 +6,7 @@ public class EnemySpawning : MonoBehaviour
 {
     [SerializeField] List<WaveConfigurations> waveConfigurations;
     private int startWave = 0;
+    private float delayBetweenWaves = 6.0f;
 
     // Start is called before the first frame update  
     IEnumerator Start()
@@ -20,8 +21,17 @@ public class EnemySpawning : MonoBehaviour
         for (int waveIndex = startWave; waveIndex < waveConfigurations.Count; waveIndex++)
         {
             WaveConfigurations currentWave = waveConfigurations[waveIndex];
-            yield return StartCoroutine(SpawnAllEnemies(currentWave));
+            yield return DelayBetweenWaves(currentWave);
         }
+    }
+
+    // Put a delay between waves
+     private IEnumerator DelayBetweenWaves(WaveConfigurations currentWave)
+    {
+        StartCoroutine(SpawnAllEnemies(currentWave));
+        yield return new WaitForSeconds(delayBetweenWaves + 
+        currentWave.GetQuantityOfEnemies() * 
+        currentWave.GetPeriodBetweenSpawning());
     }
 
     // For spawning all enemies in current wave
