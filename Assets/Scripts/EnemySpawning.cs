@@ -25,10 +25,11 @@ public class EnemySpawning : MonoBehaviour
         }
     }
 
-    // Put a delay between waves
+    // Put a delay between waves spawning
      private IEnumerator DelayBetweenWaves(WaveConfigurations currentWave)
-    {
+    {   
         StartCoroutine(SpawnAllEnemies(currentWave));
+        // Wait for all enemies to appear, then add delay
         yield return new WaitForSeconds(delayBetweenWaves + 
         currentWave.GetQuantityOfEnemies() * 
         currentWave.GetPeriodBetweenSpawning());
