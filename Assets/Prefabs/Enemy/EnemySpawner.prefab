@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveConfigurations:
-  - {fileID: 11400000, guid: 2569aa2b2d7c35847874c038ce0cf635, type: 2}
-  - {fileID: 11400000, guid: b16b80e0923f2514d96ca617e7283c7d, type: 2}
+  - {fileID: 11400000, guid: 61795678bdc54af45accb4125af89249, type: 2}
+  - {fileID: 11400000, guid: 55d1d90d4eddf62489291e5b93dfec35, type: 2}
   - {fileID: 11400000, guid: 4599dd92d6f39574481b4659c95e3e62, type: 2}
   - {fileID: 11400000, guid: 470d3c89f3e754e42855a34cc202df4f, type: 2}
   - {fileID: 11400000, guid: c7706e7d7f540ff40bd46588f9479254, type: 2}
@@ -53,3 +53,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 54213dc012e12e54d8f14dff39dc50cf, type: 2}
   - {fileID: 11400000, guid: 4a78b2f5f873c6745954f7a07adf7838, type: 2}
   - {fileID: 11400000, guid: 61795678bdc54af45accb4125af89249, type: 2}
+  - {fileID: 11400000, guid: 55d1d90d4eddf62489291e5b93dfec35, type: 2}

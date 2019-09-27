@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9cb49ff729f686346b62664b811bd0bf, type: 3}
-  m_Color: {r: 0.36418653, g: 0.4592143, b: 0.8301887, a: 1}
+  m_Color: {r: 0.36470592, g: 0.83137256, b: 0.75262535, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,14 +95,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60199d832d403164283425e1cf454942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealthPoints: 100
+  enemyHealthPoints: 400
   scoreValue: 300
-  minPeriodBetweenShots: 0.2
+  minPeriodBetweenShots: 0.8
   maxPeriodBetweenShots: 3
-  enemyLaserObject: {fileID: 0}
+  enemyLaserObject: {fileID: 5155953065652748526, guid: b2f94b622c3d88f43b5800366af4c640,
+    type: 3}
   laserSpeed: 10
-  deathVFX: {fileID: 0}
-  durationOfExplosion: 1
+  deathVFX: {fileID: 8646174394457154511, guid: 98bc0403d8077994f8e23556b76a7190,
+    type: 3}
+  durationOfExplosion: 0.3
 --- !u!114 &4773522568266892878
 MonoBehaviour:
   m_ObjectHideFlags: 0
