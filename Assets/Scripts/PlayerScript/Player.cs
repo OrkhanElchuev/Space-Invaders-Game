@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
     // Increase number of Lasers from "WeaponPowerUp"
     private void IncreaseNumberOfLasers()
     {
-        if (numberOfLasers < 4)
+        if (numberOfLasers < 5)
         {
             numberOfLasers++;
         }
@@ -269,9 +269,8 @@ public class Player : MonoBehaviour
                     NumberOfLasersUpgrade("right", 0.5f);
                     break;
                 case 4:
-                    NumberOfLasersUpgrade("straight", 0f);
-                    NumberOfLasersUpgrade("left", -0.2f);
                     NumberOfLasersUpgrade("leftCorner", -0.5f);
+                    NumberOfLasersUpgrade("left", -0.2f);
                     NumberOfLasersUpgrade("right", 0.2f);
                     NumberOfLasersUpgrade("rightCorner", 0.5f);
                     break;

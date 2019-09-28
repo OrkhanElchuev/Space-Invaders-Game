@@ -21,8 +21,8 @@ public class Enemy : MonoBehaviour
 
     [Header("PowerUps")]
     [SerializeField] GameObject powerUpObject;
-    private string[] powerUpsArray = { "WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp" };
-    //private string[] powerUpsArray = { "HealthPowerUp", "AttackSpeedPowerUp", "ScorePowerUp", "WeaponPowerUp" };
+    //private string[] powerUpsArray = { "WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp" };
+    private string[] powerUpsArray = { "HealthPowerUp", "AttackSpeedPowerUp", "ScorePowerUp", "WeaponPowerUp" };
 
 
     // Start is called before the first frame update
@@ -100,7 +100,7 @@ public class Enemy : MonoBehaviour
     {
         int probabilityOfPowerUp = Random.Range(1, 101);
         // 10 percent probability of dropping power up
-        if (probabilityOfPowerUp <= 100)
+        if (probabilityOfPowerUp <= 25)
         {
             DropPowerUp();
         }
