@@ -18,6 +18,12 @@ public class Enemy : MonoBehaviour
     [Header("Explosion Effect")]
     [SerializeField] GameObject deathVFX;
     [SerializeField] float durationOfExplosion = 1.0f;
+    
+    [Header("PowerUps")]
+    [SerializeField] GameObject powerUpObject;
+    private string[] powerUpArray = {"WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp"};
+    //private string[] powerUpArray = {"HealthPowerUp", "AttackSpeedPowerUp", "ScorePowerUp", "WeaponPowerUp"};
+
 
     // Start is called before the first frame update
     void Start()
@@ -79,9 +85,22 @@ public class Enemy : MonoBehaviour
         ProcessHit(laserDamage);
     }
 
+    private void DropPowerUp()
+    {
+        int randomType = Random.Range(0, 4);
+        GameObject powerUp = Instantiate(powerUpObject, transform.position, Quaternion.identity);
+        PowerUps powerUpScript = powerUp.GetComponent<PowerUps>();
+        powerUpScript.SetPowerUpType(powerUpArray[randomType]);
+    }
+
     // Destroy the enemy object
     private void DestroyEnemy()
     {
+        int random = Random.Range(1, 101);
+        if (random <= 100)
+        {
+            DropPowerUp();
+        }
         // Add score value to score field
         FindObjectOfType<GameStatus>().AddToScore(scoreValue);
         Destroy(gameObject);

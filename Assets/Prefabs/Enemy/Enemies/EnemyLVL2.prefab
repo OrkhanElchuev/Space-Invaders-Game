@@ -98,13 +98,15 @@ MonoBehaviour:
   enemyHealthPoints: 300
   scoreValue: 200
   minPeriodBetweenShots: 1
-  maxPeriodBetweenShots: 4
+  maxPeriodBetweenShots: 3.5
   enemyLaserObject: {fileID: 5155953065652748526, guid: 818c65c8ce394e14b89e3cbcdee9093e,
     type: 3}
   laserSpeed: 8
   deathVFX: {fileID: 8646174394457154511, guid: 98bc0403d8077994f8e23556b76a7190,
     type: 3}
   durationOfExplosion: 0.3
+  powerUpObject: {fileID: 450916139189441257, guid: a9efdf5cd5804e648ba498fa2b6053b7,
+    type: 3}
 --- !u!114 &-1348924491535288139
 MonoBehaviour:
   m_ObjectHideFlags: 0

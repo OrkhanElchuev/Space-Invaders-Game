@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private float durationOfExplosion = 0.4f;
     [SerializeField] GameObject sceneLoaderObject;
 
+    private int numberOfLasers = 1;
     private GameStatus gameStatus;
 
     private Coroutine shootingCoroutine;
@@ -43,6 +44,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ShowHealthBarIcons(playerHealthPoints);
         SetMovementLimitsForPlayer();
     }
 
@@ -56,6 +58,7 @@ public class Player : MonoBehaviour
     // Show correct amount of health icons based on healthpoints
     private void ShowHealthBarIcons(int healthPoints)
     {
+        Debug.Log(healthPoints);
         for (int i = 0; i < healthPoints; i++)
         {
             HealthBar.GetChild(i).GetComponent<Image>().enabled = true;
@@ -93,29 +96,84 @@ public class Player : MonoBehaviour
         GetComponent<PolygonCollider2D>().enabled = false;
     }
 
+    private void IncreaseScore()
+    {
+        int currentScore = gameStatus.GetScore();
+        int blabla = 1000;
+        gameStatus.AddToScore(blabla);
+    }
+
+    private void IncreaseAttackSpeed()
+    {
+        laserShootingPeriod /= 2;
+    }
+
+    private void IncreaseNumberOfLasers()
+    {
+        if (numberOfLasers < 3)
+        {
+            numberOfLasers++;
+        }
+    }
+
+    private void IncreasePlayerHealth()
+    {
+        if (playerHealthPoints < 5)
+        {
+            playerHealthPoints++;
+            ShowHealthBarIcons(playerHealthPoints);
+        }
+    }
+    private void UpgradePlayer(string powerUpType)
+    {
+        switch (powerUpType)
+        {
+            case "HealthPowerUp":
+                IncreasePlayerHealth();
+                break;
+            case "AttackSpeedPowerUp":
+                IncreaseAttackSpeed();
+                break;
+            case "ScorePowerUp":
+                IncreaseScore();
+                break;
+            case "WeaponPowerUp":
+                IncreaseNumberOfLasers();
+                break;
+        }
+    }
+
     // On collision of enemy or enemy bullet with player
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        playerHealthPoints--;
-        DisablePlayerComponents();
-        // If shooting is pressed before the player is dead
-        if (shootingCoroutine != null)
+        if (collision.gameObject.tag == "PowerUp")
         {
-            // Stop shooting coroutine until the next shooting input from user
-            StopCoroutine(shootingCoroutine);
+            UpgradePlayer(collision.gameObject.GetComponent<PowerUps>().GetPowerUpType());
+            Destroy(collision.gameObject);
         }
-        // Delay for Respawn and ColliderEnabling methods
-        Invoke("Respawn", 0.6f);
-        Invoke("ColliderEnabling", 1.0f);
-        RunExplosionEffect();
-        ShowHealthBarIcons(playerHealthPoints);
-        Destroy(collision.gameObject);
-        if (playerHealthPoints <= 0)
+        else
         {
-            PlayerInfo.GetComponent<PlayerInfo>().SetScore(gameStatus.GetScore());
-            PlayerInfo.GetComponent<PlayerInfo>().SavePlayer();
-            DestroyPlayer();
-            sceneLoaderObject.GetComponent<SceneLoader>().LoadGameOver();
+            playerHealthPoints--;
+            DisablePlayerComponents();
+            // If shooting is pressed before the player is dead
+            if (shootingCoroutine != null)
+            {
+                // Stop shooting coroutine until the next shooting input from user
+                StopCoroutine(shootingCoroutine);
+            }
+            // Delay for Respawn and ColliderEnabling methods
+            Invoke("Respawn", 0.6f);
+            Invoke("ColliderEnabling", 1.0f);
+            RunExplosionEffect();
+            ShowHealthBarIcons(playerHealthPoints);
+            Destroy(collision.gameObject);
+            if (playerHealthPoints <= 0)
+            {
+                PlayerInfo.GetComponent<PlayerInfo>().SetScore(gameStatus.GetScore());
+                PlayerInfo.GetComponent<PlayerInfo>().SavePlayer();
+                DestroyPlayer();
+                sceneLoaderObject.GetComponent<SceneLoader>().LoadGameOver();
+            }
         }
     }
 
@@ -149,13 +207,43 @@ public class Player : MonoBehaviour
     {
         while (true)
         {
-            // Create laser object when player shoots
-            // + new Vector3(0,1,0) for shifting laser projectile up
-            GameObject laser = Instantiate(playerLaserObject,
-             transform.position + new Vector3(0, 1, 0),
-                Quaternion.identity) as GameObject;
-            // Setting velocity for laser
-            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+            switch (numberOfLasers)
+            {
+                case 1:
+                    // Create laser object when player shoots
+                    // + new Vector3(0,1,0) for shifting laser projectile up
+                    GameObject laser = Instantiate(playerLaserObject,
+                     transform.position + new Vector3(0, 1, 0),
+                        Quaternion.identity) as GameObject;
+                    // Setting velocity for laser
+                    laser.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "straight");
+                    break;
+                case 2:
+                    GameObject laser1 = Instantiate(playerLaserObject,
+                     transform.position + new Vector3(-0.5f, 1, 0),
+                        Quaternion.identity) as GameObject;
+                    laser1.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "straight");
+                    GameObject laser2 = Instantiate(playerLaserObject,
+                    transform.position + new Vector3(0.5f, 1, 0),
+                       Quaternion.identity) as GameObject;
+                    laser2.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "straight");
+                    break;
+                case 3:
+                    GameObject laser3 = Instantiate(playerLaserObject,
+                     transform.position + new Vector3(0, 1, 0),
+                        Quaternion.identity) as GameObject;
+                    laser3.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "straight");
+                    GameObject laser4 = Instantiate(playerLaserObject,
+                     transform.position + new Vector3(-0.5f, 1, 0),
+                        Quaternion.identity) as GameObject;
+                    laser4.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "left");
+                    GameObject laser5 = Instantiate(playerLaserObject,
+                    transform.position + new Vector3(0.5f, 1, 0),
+                       Quaternion.identity) as GameObject;
+                    laser5.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "right");
+                    break;
+            }
+
             // Create a delay between next shot
             yield return new WaitForSeconds(laserShootingPeriod);
         }
