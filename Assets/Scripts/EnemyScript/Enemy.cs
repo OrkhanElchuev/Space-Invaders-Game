@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour
     {
         int probabilityOfPowerUp = Random.Range(1, 101);
         // 10 percent probability of dropping power up
-        if (probabilityOfPowerUp <= 10)
+        if (probabilityOfPowerUp <= 100)
         {
             DropPowerUp();
         }

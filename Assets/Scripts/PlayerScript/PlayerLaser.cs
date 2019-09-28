@@ -26,8 +26,8 @@ public class PlayerLaser : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    private void Update()
+    // Set Laser Type
+    private void SetLaserType()
     {
         switch (laserType)
         {
@@ -44,5 +44,11 @@ public class PlayerLaser : MonoBehaviour
                 GetComponent<Rigidbody2D>().velocity = new Vector2(2, laserSpeed);
                 break;
         }
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        SetLaserType();
     }
 }
