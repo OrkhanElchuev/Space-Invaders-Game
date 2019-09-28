@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     [Header("Shooting")]
     [SerializeField] float laserSpeed = 10.0f;
-    [SerializeField] float laserShootingPeriod = 0.2f;
+    [SerializeField] float laserShootingPeriod = 0.3f;
     [SerializeField] GameObject playerLaserObject;
     private int numberOfLasers = 1;
     private Coroutine shootingCoroutine;
@@ -97,15 +97,36 @@ public class Player : MonoBehaviour
     private void IncreaseScore()
     {
         int currentScore = gameStatus.GetScore();
-        int blabla = 1000;
-        gameStatus.AddToScore(blabla);
+        // Get a value from 500 up to 1000(only hundreds)
+        int addScore = Random.Range(5, 11) * 100;
+        // Increase the weigh of Power Up according to Current Score Value
+        if (currentScore < 5000)
+        {
+            gameStatus.AddToScore(addScore);
+        }
+        else if (currentScore >= 5000 && currentScore < 10000)
+        {
+            gameStatus.AddToScore(addScore * 2);
+        }
+        else if (currentScore >= 10000 && currentScore < 25000)
+        {
+            gameStatus.AddToScore(addScore * 3);
+        }
+        else if (currentScore >= 25000 && currentScore < 50000)
+        {
+            gameStatus.AddToScore(addScore * 5);
+        }
+        else
+        {
+            gameStatus.AddToScore(addScore * 10);
+        }
     }
 
     // Increase Attack Speed from "AttackSpeedPowerUp"
     private void IncreaseAttackSpeed()
     {
         // Limit max attack speed
-        float maxAttackSShootingPeriod = 0.7f;
+        float maxAttackSShootingPeriod = 0.07f;
         if (laserShootingPeriod > maxAttackSShootingPeriod)
         {
             laserShootingPeriod /= 1.2f;
@@ -134,13 +155,8 @@ public class Player : MonoBehaviour
             playerHealthPoints++;
             ShowHealthBarIcons(playerHealthPoints);
         }
-        else
-        {
-            // If healthPoints are full, consider current powerUp as IncreaseScore 
-            IncreaseScore();
-        }
     }
-    
+
     private void UpgradePlayer(string powerUpType)
     {
         switch (powerUpType)
