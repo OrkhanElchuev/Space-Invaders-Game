@@ -21,7 +21,9 @@ public class Enemy : MonoBehaviour
 
     [Header("PowerUps")]
     [SerializeField] GameObject powerUpObject;
+    //private string[] powerUpsArray = { "WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp" };
     private string[] powerUpsArray = { "HealthPowerUp", "AttackSpeedPowerUp", "ScorePowerUp", "WeaponPowerUp" };
+
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +54,7 @@ public class Enemy : MonoBehaviour
     // Method for enemy shooting
     private void Shoot()
     {
-        // Create laser object from enemie's position
+        // Create laser object from enemy's position
         GameObject enemyLaser = Instantiate(enemyLaserObject,
             transform.position, Quaternion.identity) as GameObject;
         // -laserSpeed to shoot downwards
@@ -98,7 +100,7 @@ public class Enemy : MonoBehaviour
     {
         int probabilityOfPowerUp = Random.Range(1, 101);
         // 10 percent probability of dropping power up
-        if (probabilityOfPowerUp <= 100)
+        if (probabilityOfPowerUp <= 25)
         {
             DropPowerUp();
         }

@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     [Header("Shooting")]
     [SerializeField] float laserSpeed = 10.0f;
-    [SerializeField] float laserShootingPeriod = 0.2f;
+    [SerializeField] float laserShootingPeriod = 0.3f;
     [SerializeField] GameObject playerLaserObject;
     private int numberOfLasers = 1;
     private Coroutine shootingCoroutine;
@@ -97,15 +97,36 @@ public class Player : MonoBehaviour
     private void IncreaseScore()
     {
         int currentScore = gameStatus.GetScore();
-        int blabla = 1000;
-        gameStatus.AddToScore(blabla);
+        // Get a value from 500 up to 1000(only hundreds)
+        int addScore = Random.Range(5, 11) * 100;
+        // Increase the weigh of Power Up according to Current Score Value
+        if (currentScore < 5000)
+        {
+            gameStatus.AddToScore(addScore);
+        }
+        else if (currentScore >= 5000 && currentScore < 10000)
+        {
+            gameStatus.AddToScore(addScore * 2);
+        }
+        else if (currentScore >= 10000 && currentScore < 25000)
+        {
+            gameStatus.AddToScore(addScore * 3);
+        }
+        else if (currentScore >= 25000 && currentScore < 50000)
+        {
+            gameStatus.AddToScore(addScore * 5);
+        }
+        else
+        {
+            gameStatus.AddToScore(addScore * 10);
+        }
     }
 
     // Increase Attack Speed from "AttackSpeedPowerUp"
     private void IncreaseAttackSpeed()
     {
         // Limit max attack speed
-        float maxAttackSShootingPeriod = 0.7f;
+        float maxAttackSShootingPeriod = 0.07f;
         if (laserShootingPeriod > maxAttackSShootingPeriod)
         {
             laserShootingPeriod /= 1.2f;
@@ -120,7 +141,7 @@ public class Player : MonoBehaviour
     // Increase number of Lasers from "WeaponPowerUp"
     private void IncreaseNumberOfLasers()
     {
-        if (numberOfLasers < 3)
+        if (numberOfLasers < 5)
         {
             numberOfLasers++;
         }
@@ -134,13 +155,9 @@ public class Player : MonoBehaviour
             playerHealthPoints++;
             ShowHealthBarIcons(playerHealthPoints);
         }
-        else
-        {
-            // If healthPoints are full, consider current powerUp as IncreaseScore 
-            IncreaseScore();
-        }
     }
-    
+
+    // Executing relevant upgrade according to powerUp
     private void UpgradePlayer(string powerUpType)
     {
         switch (powerUpType)
@@ -163,9 +180,11 @@ public class Player : MonoBehaviour
     // On collision of enemy or enemy bullet with player
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // If collision object is PowerUP do not destroy Player
         if (collision.gameObject.tag == "PowerUp")
         {
             UpgradePlayer(collision.gameObject.GetComponent<PowerUps>().GetPowerUpType());
+            // Destroy PowerUp Object
             Destroy(collision.gameObject);
         }
         else
@@ -219,7 +238,18 @@ public class Player : MonoBehaviour
         Destroy(explosion, durationOfExplosion);
     }
 
-    // To shoot while the key is pressed
+    private void NumberOfLasersUpgrade(string direction, float position)
+    {
+        // Create laser object when player shoots
+        // + new Vector3(position,1,0) for shifting laser projectile up
+        GameObject laser = Instantiate(playerLaserObject,
+                 transform.position + new Vector3(position, 1, 0),
+                    Quaternion.identity) as GameObject;
+        // Setting velocity for laser
+        laser.GetComponent<PlayerLaser>().CreateItself(laserSpeed, direction);
+    }
+
+    // To shoot while the key is pressed and deal with number of Lasers player has
     IEnumerator ShootContinuously()
     {
         while (true)
@@ -227,37 +257,29 @@ public class Player : MonoBehaviour
             switch (numberOfLasers)
             {
                 case 1:
-                    // Create laser object when player shoots
-                    // + new Vector3(0,1,0) for shifting laser projectile up
-                    GameObject laser = Instantiate(playerLaserObject,
-                     transform.position + new Vector3(0, 1, 0),
-                        Quaternion.identity) as GameObject;
-                    // Setting velocity for laser
-                    laser.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "straight");
+                    NumberOfLasersUpgrade("straight", 0);
                     break;
                 case 2:
-                    GameObject laser1 = Instantiate(playerLaserObject,
-                     transform.position + new Vector3(-0.5f, 1, 0),
-                        Quaternion.identity) as GameObject;
-                    laser1.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "straight");
-                    GameObject laser2 = Instantiate(playerLaserObject,
-                    transform.position + new Vector3(0.5f, 1, 0),
-                       Quaternion.identity) as GameObject;
-                    laser2.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "straight");
+                    NumberOfLasersUpgrade("straight", 0f);
+                    NumberOfLasersUpgrade("straight", 0.5f);
                     break;
                 case 3:
-                    GameObject laser3 = Instantiate(playerLaserObject,
-                     transform.position + new Vector3(0, 1, 0),
-                        Quaternion.identity) as GameObject;
-                    laser3.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "straight");
-                    GameObject laser4 = Instantiate(playerLaserObject,
-                     transform.position + new Vector3(-0.5f, 1, 0),
-                        Quaternion.identity) as GameObject;
-                    laser4.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "left");
-                    GameObject laser5 = Instantiate(playerLaserObject,
-                    transform.position + new Vector3(0.5f, 1, 0),
-                       Quaternion.identity) as GameObject;
-                    laser5.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "right");
+                    NumberOfLasersUpgrade("straight", 0f);
+                    NumberOfLasersUpgrade("left", -0.5f);
+                    NumberOfLasersUpgrade("right", 0.5f);
+                    break;
+                case 4:
+                    NumberOfLasersUpgrade("leftCorner", -0.5f);
+                    NumberOfLasersUpgrade("left", -0.2f);
+                    NumberOfLasersUpgrade("right", 0.2f);
+                    NumberOfLasersUpgrade("rightCorner", 0.5f);
+                    break;
+                case 5:
+                    NumberOfLasersUpgrade("straight", 0f);
+                    NumberOfLasersUpgrade("left", -0.2f);
+                    NumberOfLasersUpgrade("leftCorner", -0.5f);
+                    NumberOfLasersUpgrade("right", 0.2f);
+                    NumberOfLasersUpgrade("rightCorner", 0.5f);
                     break;
             }
             // Create a delay between next shot
