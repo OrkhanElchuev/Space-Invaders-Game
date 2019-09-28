@@ -93,29 +93,56 @@ public class Player : MonoBehaviour
         GetComponent<PolygonCollider2D>().enabled = false;
     }
 
+    private void UpgradePlayer(string powerUpType)
+    {
+        switch (powerUpType)
+        {
+            case "HealthPowerUp":
+                Debug.Log("Health");
+                break;
+            case "AttackSpeedPowerUp":
+                Debug.Log("AttackSpeed");
+                break;
+            case "ScorePowerUp":
+                Debug.Log("Score");
+                break;
+            case "WeaponPowerUp":
+                Debug.Log("Weapon");
+                break;
+        }
+    }
+
     // On collision of enemy or enemy bullet with player
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        playerHealthPoints--;
-        DisablePlayerComponents();
-        // If shooting is pressed before the player is dead
-        if (shootingCoroutine != null)
+        if (collision.gameObject.tag == "PowerUp")
         {
-            // Stop shooting coroutine until the next shooting input from user
-            StopCoroutine(shootingCoroutine);
+            UpgradePlayer(collision.gameObject.GetComponent<PowerUps>().GetPowerUpType());
+            Destroy(collision.gameObject);
         }
-        // Delay for Respawn and ColliderEnabling methods
-        Invoke("Respawn", 0.6f);
-        Invoke("ColliderEnabling", 1.0f);
-        RunExplosionEffect();
-        ShowHealthBarIcons(playerHealthPoints);
-        Destroy(collision.gameObject);
-        if (playerHealthPoints <= 0)
+        else
         {
-            PlayerInfo.GetComponent<PlayerInfo>().SetScore(gameStatus.GetScore());
-            PlayerInfo.GetComponent<PlayerInfo>().SavePlayer();
-            DestroyPlayer();
-            sceneLoaderObject.GetComponent<SceneLoader>().LoadGameOver();
+            playerHealthPoints--;
+            DisablePlayerComponents();
+            // If shooting is pressed before the player is dead
+            if (shootingCoroutine != null)
+            {
+                // Stop shooting coroutine until the next shooting input from user
+                StopCoroutine(shootingCoroutine);
+            }
+            // Delay for Respawn and ColliderEnabling methods
+            Invoke("Respawn", 0.6f);
+            Invoke("ColliderEnabling", 1.0f);
+            RunExplosionEffect();
+            ShowHealthBarIcons(playerHealthPoints);
+            Destroy(collision.gameObject);
+            if (playerHealthPoints <= 0)
+            {
+                PlayerInfo.GetComponent<PlayerInfo>().SetScore(gameStatus.GetScore());
+                PlayerInfo.GetComponent<PlayerInfo>().SavePlayer();
+                DestroyPlayer();
+                sceneLoaderObject.GetComponent<SceneLoader>().LoadGameOver();
+            }
         }
     }
 

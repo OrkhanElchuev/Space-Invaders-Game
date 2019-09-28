@@ -35,6 +35,10 @@ public class PowerUps : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = powerUpSprite;
     }
 
+    public string GetPowerUpType(){
+        return powerUpType;
+    }
+
     private void MovePowerUp()
     {
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, -powerUpSpeed);
