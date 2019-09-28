@@ -21,7 +21,8 @@ public class Enemy : MonoBehaviour
     
     [Header("PowerUps")]
     [SerializeField] GameObject powerUpObject;
-    private string[] powerUpArray = {"HealthPowerUp", "AttackSpeedPowerUp", "ScorePowerUp", "WeaponPowerUp"};
+    private string[] powerUpArray = {"WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp"};
+    //private string[] powerUpArray = {"HealthPowerUp", "AttackSpeedPowerUp", "ScorePowerUp", "WeaponPowerUp"};
 
 
     // Start is called before the first frame update

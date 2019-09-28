@@ -35,7 +35,8 @@ public class PowerUps : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = powerUpSprite;
     }
 
-    public string GetPowerUpType(){
+    public string GetPowerUpType()
+    {
         return powerUpType;
     }
 
@@ -47,7 +48,7 @@ public class PowerUps : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
