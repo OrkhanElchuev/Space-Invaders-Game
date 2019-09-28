@@ -13,6 +13,7 @@ public class PlayerLaser : MonoBehaviour
         return damage;
     }
 
+    // Set speed and type values
     public void CreateItself(float speed, string type)
     {
         laserSpeed = speed;
@@ -25,20 +26,29 @@ public class PlayerLaser : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void Update()
+    // Set Laser Type
+    private void SetLaserType()
     {
-
         switch (laserType)
         {
+            // Straight Laser
             case "straight":
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
                 break;
+            // Tilted to the left 
             case "left":
                 GetComponent<Rigidbody2D>().velocity = new Vector2(-2, laserSpeed);
                 break;
+            // Tilted to the right 
             case "right":
                 GetComponent<Rigidbody2D>().velocity = new Vector2(2, laserSpeed);
                 break;
         }
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        SetLaserType();
     }
 }

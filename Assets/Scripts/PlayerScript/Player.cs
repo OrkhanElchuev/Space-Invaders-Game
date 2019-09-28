@@ -19,17 +19,15 @@ public class Player : MonoBehaviour
     [SerializeField] float laserSpeed = 10.0f;
     [SerializeField] float laserShootingPeriod = 0.2f;
     [SerializeField] GameObject playerLaserObject;
+    private int numberOfLasers = 1;
+    private Coroutine shootingCoroutine;
 
     [Header("Particle Effect")]
     [SerializeField] GameObject deathVFXObject;
     private float durationOfExplosion = 0.4f;
     [SerializeField] GameObject sceneLoaderObject;
 
-    private int numberOfLasers = 1;
     private GameStatus gameStatus;
-
-    private Coroutine shootingCoroutine;
-
     private float xMin;
     private float xMax;
     private float yMin;
@@ -58,7 +56,6 @@ public class Player : MonoBehaviour
     // Show correct amount of health icons based on healthpoints
     private void ShowHealthBarIcons(int healthPoints)
     {
-        Debug.Log(healthPoints);
         for (int i = 0; i < healthPoints; i++)
         {
             HealthBar.GetChild(i).GetComponent<Image>().enabled = true;
@@ -96,6 +93,7 @@ public class Player : MonoBehaviour
         GetComponent<PolygonCollider2D>().enabled = false;
     }
 
+    // Increase Score from "ScorePowerUp"
     private void IncreaseScore()
     {
         int currentScore = gameStatus.GetScore();
@@ -103,11 +101,23 @@ public class Player : MonoBehaviour
         gameStatus.AddToScore(blabla);
     }
 
+    // Increase Attack Speed from "AttackSpeedPowerUp"
     private void IncreaseAttackSpeed()
     {
-        laserShootingPeriod /= 2;
+        // Limit max attack speed
+        float maxAttackSShootingPeriod = 0.7f;
+        if (laserShootingPeriod > maxAttackSShootingPeriod)
+        {
+            laserShootingPeriod /= 1.2f;
+        }
+        else
+        {
+            // If attack speed is max, consider the next ones as IncreaseScore 
+            IncreaseScore();
+        }
     }
 
+    // Increase number of Lasers from "WeaponPowerUp"
     private void IncreaseNumberOfLasers()
     {
         if (numberOfLasers < 3)
@@ -116,6 +126,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Increase health points from "HealthPowerUp"
     private void IncreasePlayerHealth()
     {
         if (playerHealthPoints < 5)
@@ -123,7 +134,13 @@ public class Player : MonoBehaviour
             playerHealthPoints++;
             ShowHealthBarIcons(playerHealthPoints);
         }
+        else
+        {
+            // If healthPoints are full, consider current powerUp as IncreaseScore 
+            IncreaseScore();
+        }
     }
+    
     private void UpgradePlayer(string powerUpType)
     {
         switch (powerUpType)
@@ -243,7 +260,6 @@ public class Player : MonoBehaviour
                     laser5.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "right");
                     break;
             }
-
             // Create a delay between next shot
             yield return new WaitForSeconds(laserShootingPeriod);
         }

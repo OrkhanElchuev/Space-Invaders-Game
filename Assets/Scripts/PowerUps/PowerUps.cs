@@ -12,12 +12,18 @@ public class PowerUps : MonoBehaviour
 
     private Sprite powerUpSprite;
     private string powerUpType;
-    private int powerUpSpeed = 5;
+    private int powerUpSpeed = 6;
 
+    // Setting power Up type and changing sprite accordingly
     public void SetPowerUpType(string type)
     {
         powerUpType = type;
-        switch (type)
+        SetPowerUpSprite(powerUpType);
+    }
+
+    private void SetPowerUpSprite(string spriteType){
+        // Set relevant sprite according to the type
+        switch (spriteType)
         {
             case "HealthPowerUp":
                 powerUpSprite = healthSprite;
@@ -40,15 +46,11 @@ public class PowerUps : MonoBehaviour
         return powerUpType;
     }
 
+    // Moving PowerUp
     private void MovePowerUp()
     {
+        // Moving downward 
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, -powerUpSpeed);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
     }
 
     // Update is called once per frame
