@@ -43,6 +43,13 @@ public class PlayerLaser : MonoBehaviour
             case "right":
                 GetComponent<Rigidbody2D>().velocity = new Vector2(2, laserSpeed);
                 break;
+            case "leftCorner":
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-4, laserSpeed);
+                break;
+            case "rightCorner":
+                GetComponent<Rigidbody2D>().velocity = new Vector2(4, laserSpeed);
+                break;
+
         }
     }
 

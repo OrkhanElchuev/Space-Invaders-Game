@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
 
     [Header("PowerUps")]
     [SerializeField] GameObject powerUpObject;
-    private string[] powerUpsArray = { "ScorePowerUp", "ScorePowerUp", "ScorePowerUp", "ScorePowerUp" };
+    private string[] powerUpsArray = { "WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp" };
     //private string[] powerUpsArray = { "HealthPowerUp", "AttackSpeedPowerUp", "ScorePowerUp", "WeaponPowerUp" };
 
 

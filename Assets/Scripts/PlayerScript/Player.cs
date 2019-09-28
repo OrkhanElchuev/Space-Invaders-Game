@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
     // Increase number of Lasers from "WeaponPowerUp"
     private void IncreaseNumberOfLasers()
     {
-        if (numberOfLasers < 3)
+        if (numberOfLasers < 4)
         {
             numberOfLasers++;
         }
@@ -157,6 +157,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Executing relevant upgrade according to powerUp
     private void UpgradePlayer(string powerUpType)
     {
         switch (powerUpType)
@@ -179,9 +180,11 @@ public class Player : MonoBehaviour
     // On collision of enemy or enemy bullet with player
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // If collision object is PowerUP do not destroy Player
         if (collision.gameObject.tag == "PowerUp")
         {
             UpgradePlayer(collision.gameObject.GetComponent<PowerUps>().GetPowerUpType());
+            // Destroy PowerUp Object
             Destroy(collision.gameObject);
         }
         else
@@ -235,7 +238,18 @@ public class Player : MonoBehaviour
         Destroy(explosion, durationOfExplosion);
     }
 
-    // To shoot while the key is pressed
+    private void NumberOfLasersUpgrade(string direction, float position)
+    {
+        // Create laser object when player shoots
+        // + new Vector3(position,1,0) for shifting laser projectile up
+        GameObject laser = Instantiate(playerLaserObject,
+                 transform.position + new Vector3(position, 1, 0),
+                    Quaternion.identity) as GameObject;
+        // Setting velocity for laser
+        laser.GetComponent<PlayerLaser>().CreateItself(laserSpeed, direction);
+    }
+
+    // To shoot while the key is pressed and deal with number of Lasers player has
     IEnumerator ShootContinuously()
     {
         while (true)
@@ -243,37 +257,30 @@ public class Player : MonoBehaviour
             switch (numberOfLasers)
             {
                 case 1:
-                    // Create laser object when player shoots
-                    // + new Vector3(0,1,0) for shifting laser projectile up
-                    GameObject laser = Instantiate(playerLaserObject,
-                     transform.position + new Vector3(0, 1, 0),
-                        Quaternion.identity) as GameObject;
-                    // Setting velocity for laser
-                    laser.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "straight");
+                    NumberOfLasersUpgrade("straight", 0);
                     break;
                 case 2:
-                    GameObject laser1 = Instantiate(playerLaserObject,
-                     transform.position + new Vector3(-0.5f, 1, 0),
-                        Quaternion.identity) as GameObject;
-                    laser1.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "straight");
-                    GameObject laser2 = Instantiate(playerLaserObject,
-                    transform.position + new Vector3(0.5f, 1, 0),
-                       Quaternion.identity) as GameObject;
-                    laser2.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "straight");
+                    NumberOfLasersUpgrade("straight", 0f);
+                    NumberOfLasersUpgrade("straight", 0.5f);
                     break;
                 case 3:
-                    GameObject laser3 = Instantiate(playerLaserObject,
-                     transform.position + new Vector3(0, 1, 0),
-                        Quaternion.identity) as GameObject;
-                    laser3.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "straight");
-                    GameObject laser4 = Instantiate(playerLaserObject,
-                     transform.position + new Vector3(-0.5f, 1, 0),
-                        Quaternion.identity) as GameObject;
-                    laser4.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "left");
-                    GameObject laser5 = Instantiate(playerLaserObject,
-                    transform.position + new Vector3(0.5f, 1, 0),
-                       Quaternion.identity) as GameObject;
-                    laser5.GetComponent<PlayerLaser>().CreateItself(laserSpeed, "right");
+                    NumberOfLasersUpgrade("straight", 0f);
+                    NumberOfLasersUpgrade("left", -0.5f);
+                    NumberOfLasersUpgrade("right", 0.5f);
+                    break;
+                case 4:
+                    NumberOfLasersUpgrade("straight", 0f);
+                    NumberOfLasersUpgrade("left", -0.2f);
+                    NumberOfLasersUpgrade("leftCorner", -0.5f);
+                    NumberOfLasersUpgrade("right", 0.2f);
+                    NumberOfLasersUpgrade("rightCorner", 0.5f);
+                    break;
+                case 5:
+                    NumberOfLasersUpgrade("straight", 0f);
+                    NumberOfLasersUpgrade("left", -0.2f);
+                    NumberOfLasersUpgrade("leftCorner", -0.5f);
+                    NumberOfLasersUpgrade("right", 0.2f);
+                    NumberOfLasersUpgrade("rightCorner", 0.5f);
                     break;
             }
             // Create a delay between next shot
