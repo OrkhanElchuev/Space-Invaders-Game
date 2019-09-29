@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     // Configuration parameters
     // Headers for readability in unity
     [Header("Player Configurations")]
-    [SerializeField] float movingSpeedOfPlayer = 10.0f;
+    [SerializeField]  float movingSpeedOfPlayer = 25.0f;
     private int playerHealthPoints = 4;
     private int maxHealthPoints = 5;
     private Transform HealthBar;
@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject PlayerInfo;
 
     [Header("Shooting")]
-    [SerializeField] float laserSpeed = 10.0f;
+    [SerializeField] float laserSpeed = 20.0f;
     [SerializeField] float laserShootingPeriod = 0.3f;
     [SerializeField] GameObject playerLaserObject;
     private int numberOfLasers = 1;
@@ -238,6 +238,7 @@ public class Player : MonoBehaviour
         Destroy(explosion, durationOfExplosion);
     }
 
+    // Instantiating laser object with flexible position and direction
     private void NumberOfLasersUpgrade(string direction, float position)
     {
         // Create laser object when player shoots
@@ -260,8 +261,8 @@ public class Player : MonoBehaviour
                     NumberOfLasersUpgrade("straight", 0);
                     break;
                 case 2:
-                    NumberOfLasersUpgrade("straight", 0f);
-                    NumberOfLasersUpgrade("straight", 0.5f);
+                    NumberOfLasersUpgrade("straight", -0.3f);
+                    NumberOfLasersUpgrade("straight", 0.3f);
                     break;
                 case 3:
                     NumberOfLasersUpgrade("straight", 0f);
