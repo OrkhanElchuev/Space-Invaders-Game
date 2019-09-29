@@ -14,10 +14,13 @@ public class ScoreBoard : MonoBehaviour
     {
         playerInfoScript = PlayerInfo.GetComponent<PlayerInfo>();
         playerInfoScript.LoadPlayer();
+        
+        //SetInitialScoreBoardValues();
+        UpdateScoreBoard();
         SettingTextValues();
     }
 
-    // Fill the values of Text component with values from score board array
+    // Fill the values of Text component with values from score board arr
     private void SettingTextValues(){
         int[] scoreBoardArr = playerInfoScript.GetScoreBoard();
         for (int i = 0; i < scoreBoardArr.Length; i++)
@@ -25,4 +28,45 @@ public class ScoreBoard : MonoBehaviour
             leaderBoardTextArr[i].text = scoreBoardArr[i].ToString();
         }
     }
+
+    // Update score board 
+    private void UpdateScoreBoard()
+    {   
+        //
+        int value = playerInfoScript.GetScore();
+        int[] array = playerInfoScript.GetScoreBoard();
+        int[] newArray = new int[11];
+        int[] fixedFinalArray = new int[10];
+
+        for (int i = 0; i < array.Length; i++)
+        {
+            newArray[i] = array[i];
+        }
+
+        // Assign current score to the last index of array
+        newArray[newArray.Length - 1] = value;
+        // Sort array in descending order
+        Array.Sort(newArray);
+        Array.Reverse(newArray);
+        
+        // Fill up final array with first 10 values of sorted newArray  
+        for (int i = 0; i < fixedFinalArray.Length; i++)
+        {
+            fixedFinalArray[i] = newArray[i];
+        }
+
+        // Reset the values in scoreboard
+        playerInfoScript.SetScoreBoard(fixedFinalArray);
+        playerInfoScript.SetScore(0);
+        playerInfoScript.SavePlayer();
+    }
+    
+    // Create list of predefined values for scoreboard
+       private void SetInitialScoreBoardValues()
+    {
+        int[] array = { 225300, 195400, 152900, 11500, 75400, 52300, 35000, 25700, 15100, 5900 };
+        playerInfoScript.SetScoreBoard(array);
+        playerInfoScript.SavePlayer();
+    }
 }
+
