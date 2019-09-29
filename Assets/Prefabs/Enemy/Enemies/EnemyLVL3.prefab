@@ -102,9 +102,8 @@ MonoBehaviour:
   enemyLaserObject: {fileID: 5155953065652748526, guid: b2f94b622c3d88f43b5800366af4c640,
     type: 3}
   laserSpeed: 10
-  deathVFX: {fileID: 8646174394457154511, guid: 98bc0403d8077994f8e23556b76a7190,
+  deathVFX: {fileID: 8646174394457154511, guid: fdee50ed93e2b7b479a075692f0c8f38,
     type: 3}
-  durationOfExplosion: 0.3
   powerUpObject: {fileID: 450916139189441257, guid: a9efdf5cd5804e648ba498fa2b6053b7,
     type: 3}
 --- !u!114 &4773522568266892878
