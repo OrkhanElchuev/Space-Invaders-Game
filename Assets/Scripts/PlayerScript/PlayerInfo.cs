@@ -4,6 +4,17 @@ using System;
 public class PlayerInfo : MonoBehaviour
 {
     private int score;
+    private int[] scoreBoardArray = new int[10];
+
+    public void SetScoreBoard(int[] newScoreBoardArray)
+    {
+        scoreBoardArray = newScoreBoardArray;
+    }
+
+    public int[] GetScoreBoard()
+    {
+        return scoreBoardArray;
+    }
 
     public void SetScore(int amount)
     {
@@ -23,5 +34,6 @@ public class PlayerInfo : MonoBehaviour
     {
         PlayerData data = SaveSystem.LoadPlayer();
         score = data.GetScorePlayerData();
+        scoreBoardArray = data.GetScoreBoardPlayerData();
     }
 }
