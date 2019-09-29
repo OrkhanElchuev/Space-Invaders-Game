@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60199d832d403164283425e1cf454942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealthPoints: 400
+  enemyHealthPoints: 500
   scoreValue: 300
   minPeriodBetweenShots: 0.6
   maxPeriodBetweenShots: 3
