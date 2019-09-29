@@ -17,11 +17,10 @@ public class Enemy : MonoBehaviour
 
     [Header("Explosion Effect")]
     [SerializeField] GameObject deathVFX;
-    [SerializeField] float durationOfExplosion = 1.0f;
+    [SerializeField] float durationOfExplosion = 0.3f;
 
     [Header("PowerUps")]
     [SerializeField] GameObject powerUpObject;
-    //private string[] powerUpsArray = { "WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp", "WeaponPowerUp" };
     private string[] powerUpsArray = { "HealthPowerUp", "AttackSpeedPowerUp", "ScorePowerUp", "WeaponPowerUp" };
 
 
@@ -100,7 +99,7 @@ public class Enemy : MonoBehaviour
     {
         int probabilityOfPowerUp = Random.Range(1, 101);
         // 10 percent probability of dropping power up
-        if (probabilityOfPowerUp <= 25)
+        if (probabilityOfPowerUp <= 10)
         {
             DropPowerUp();
         }
