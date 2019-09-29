@@ -1,11 +1,16 @@
 ﻿[System.Serializable]
 public class PlayerData
 {
-  public int score;
+    private int score;
 
-  public PlayerData(PlayerInfo playerInfo)
-  {
-    score = playerInfo.GetScore();
-  }
+    public int GetScorePlayerData()
+    {
+        return score;
+    }
+
+    public PlayerData(PlayerInfo playerInfo)
+    {
+        score = playerInfo.GetScore();
+    }
 }
 
