@@ -239,7 +239,7 @@ public class Player : MonoBehaviour
     }
 
     // Instantiating laser object with flexible position and direction
-    private void NumberOfLasersUpgrade(string direction, float position)
+    private void InstantiateLaser(string direction, float position)
     {
         // Create laser object when player shoots
         // + new Vector3(position,1,0) for shifting laser projectile up
@@ -258,29 +258,29 @@ public class Player : MonoBehaviour
             switch (numberOfLasers)
             {
                 case 1:
-                    NumberOfLasersUpgrade("straight", 0);
+                    InstantiateLaser("straight", 0);
                     break;
                 case 2:
-                    NumberOfLasersUpgrade("straight", -0.3f);
-                    NumberOfLasersUpgrade("straight", 0.3f);
+                    InstantiateLaser("straight", -0.3f);
+                    InstantiateLaser("straight", 0.3f);
                     break;
                 case 3:
-                    NumberOfLasersUpgrade("straight", 0f);
-                    NumberOfLasersUpgrade("left", -0.5f);
-                    NumberOfLasersUpgrade("right", 0.5f);
+                    InstantiateLaser("straight", 0f);
+                    InstantiateLaser("left", -0.5f);
+                    InstantiateLaser("right", 0.5f);
                     break;
                 case 4:
-                    NumberOfLasersUpgrade("leftCorner", -0.5f);
-                    NumberOfLasersUpgrade("left", -0.2f);
-                    NumberOfLasersUpgrade("right", 0.2f);
-                    NumberOfLasersUpgrade("rightCorner", 0.5f);
+                    InstantiateLaser("leftCorner", -0.5f);
+                    InstantiateLaser("left", -0.2f);
+                    InstantiateLaser("right", 0.2f);
+                    InstantiateLaser("rightCorner", 0.5f);
                     break;
                 case 5:
-                    NumberOfLasersUpgrade("straight", 0f);
-                    NumberOfLasersUpgrade("left", -0.2f);
-                    NumberOfLasersUpgrade("leftCorner", -0.5f);
-                    NumberOfLasersUpgrade("right", 0.2f);
-                    NumberOfLasersUpgrade("rightCorner", 0.5f);
+                    InstantiateLaser("straight", 0f);
+                    InstantiateLaser("left", -0.2f);
+                    InstantiateLaser("leftCorner", -0.5f);
+                    InstantiateLaser("right", 0.2f);
+                    InstantiateLaser("rightCorner", 0.5f);
                     break;
             }
             // Create a delay between next shot

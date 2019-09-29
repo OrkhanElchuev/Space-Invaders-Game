@@ -6,7 +6,7 @@ public class EnemySpawning : MonoBehaviour
 {
     [SerializeField] List<WaveConfigurations> waveConfigurations;
     private int startWave = 0;
-    private float delayBetweenWaves = 6.0f;
+    private float delayBetweenWaves = 5.0f;
 
     // Start is called before the first frame update  
     IEnumerator Start()
