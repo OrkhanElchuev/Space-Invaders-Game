@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerLaser : MonoBehaviour
 {
-    [SerializeField] int damage = 100;
+    private int damage = 100;
     private float laserSpeed;
     private string laserType;
 

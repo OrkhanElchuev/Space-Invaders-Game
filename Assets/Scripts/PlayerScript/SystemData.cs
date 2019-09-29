@@ -7,23 +7,20 @@ public static class SaveSystem
   public static void SavePlayer(PlayerInfo playerInfo)
   {
     BinaryFormatter formatter = new BinaryFormatter();
-    string path = Application.persistentDataPath + "/palyer.pd";
+    string path = Application.persistentDataPath + "/player.pd";
     FileStream stream = new FileStream(path, FileMode.Create);
-
     PlayerData data = new PlayerData(playerInfo);
-
     formatter.Serialize(stream, data);
     stream.Close();
   }
 
   public static PlayerData LoadPlayer()
   {
-    string path = Application.persistentDataPath + "/palyer.pd";
+    string path = Application.persistentDataPath + "/player.pd";
     if (File.Exists(path))
     {
       BinaryFormatter formatter = new BinaryFormatter();
       FileStream stream = new FileStream(path, FileMode.Open);
-
       PlayerData data = formatter.Deserialize(stream) as PlayerData;
       stream.Close();
       return data;

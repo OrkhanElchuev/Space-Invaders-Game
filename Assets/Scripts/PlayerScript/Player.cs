@@ -6,28 +6,27 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     // Configuration parameters
+    [SerializeField] GameObject playerLaserObject;
+    private float laserSpeed = 20.0f;
+    private int numberOfLasers = 1;
+    private Coroutine shootingCoroutine;
+    private float laserShootingPeriod = 0.3f;
+
     // Headers for readability in unity
-    [Header("Player Configurations")]
-    [SerializeField]  float movingSpeedOfPlayer = 25.0f;
+    [Header("Particle Effect")]
+    [SerializeField] GameObject deathVFXObject;
+    [SerializeField] GameObject sceneLoaderObject;
+    private float durationOfExplosion = 0.4f;
+    
+    // Player configuration variables
+    private int movingSpeedOfPlayer = 25;
     private int playerHealthPoints = 4;
     private int maxHealthPoints = 5;
     private Transform HealthBar;
-
     [SerializeField] GameObject PlayerInfo;
-
-    [Header("Shooting")]
-    [SerializeField] float laserSpeed = 20.0f;
-    [SerializeField] float laserShootingPeriod = 0.3f;
-    [SerializeField] GameObject playerLaserObject;
-    private int numberOfLasers = 1;
-    private Coroutine shootingCoroutine;
-
-    [Header("Particle Effect")]
-    [SerializeField] GameObject deathVFXObject;
-    private float durationOfExplosion = 0.4f;
-    [SerializeField] GameObject sceneLoaderObject;
-
     private GameStatus gameStatus;
+    
+    // Camera Configuration Variables
     private float xMin;
     private float xMax;
     private float yMin;

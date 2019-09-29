@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Explosion Effect")]
     [SerializeField] GameObject deathVFX;
-    [SerializeField] float durationOfExplosion = 0.3f;
+    private float durationOfExplosion = 0.3f;
 
     [Header("PowerUps")]
     [SerializeField] GameObject powerUpObject;
