@@ -20,6 +20,12 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
+    public void LoadScoreBoardMenu()
+    {
+        SceneManager.LoadScene("ScoreBoard");
+    }
+
+
     // Quit the application 
     public void Quit()
     {
