@@ -18,8 +18,8 @@ public class PlayerData
     // Assign score board array and score to relevant values
     public PlayerData(PlayerInfo playerInfo)
     {
-        scoreBoardPlayerDataArr = playerInfo.GetScoreBoard();
         score = playerInfo.GetScore();
+        scoreBoardPlayerDataArr = playerInfo.GetScoreBoard();
     }
 }
 

@@ -10,18 +10,20 @@ public class ScoreBoard : MonoBehaviour
     [SerializeField] GameObject PlayerInfo;
     [SerializeField] TextMeshProUGUI[] leaderBoardTextArr;
     private PlayerInfo playerInfoScript;
-    private void Awake()
+
+    private void Start()
     {
         playerInfoScript = PlayerInfo.GetComponent<PlayerInfo>();
         playerInfoScript.LoadPlayer();
-        
+
         //SetInitialScoreBoardValues();
         UpdateScoreBoard();
         SettingTextValues();
     }
 
     // Fill the values of Text component with values from score board arr
-    private void SettingTextValues(){
+    private void SettingTextValues()
+    {
         int[] scoreBoardArr = playerInfoScript.GetScoreBoard();
         for (int i = 0; i < scoreBoardArr.Length; i++)
         {
@@ -31,9 +33,9 @@ public class ScoreBoard : MonoBehaviour
 
     // Update score board 
     private void UpdateScoreBoard()
-    {   
-        //
-        int value = playerInfoScript.GetScore();
+    {
+        // Initialize arrays and set current score value to local variable
+        int scoreValue = playerInfoScript.GetScore();
         int[] array = playerInfoScript.GetScoreBoard();
         int[] newArray = new int[7];
         int[] fixedFinalArray = new int[6];
@@ -44,11 +46,11 @@ public class ScoreBoard : MonoBehaviour
         }
 
         // Assign current score to the last index of array
-        newArray[newArray.Length - 1] = value;
+        newArray[newArray.Length - 1] = scoreValue;
         // Sort array in descending order
         Array.Sort(newArray);
         Array.Reverse(newArray);
-        
+
         // Fill up final array with first 10 values of sorted newArray  
         for (int i = 0; i < fixedFinalArray.Length; i++)
         {
@@ -60,11 +62,11 @@ public class ScoreBoard : MonoBehaviour
         playerInfoScript.SetScore(0);
         playerInfoScript.SavePlayer();
     }
-    
+
     // Create list of predefined values for scoreboard
-       private void SetInitialScoreBoardValues()
+    private void SetInitialScoreBoardValues()
     {
-        int[] array = { 225300, 152900, 52300, 35000, 15100, 5900};
+        int[] array = { 225300, 152900, 72300, 35000, 15100, 5900 };
         playerInfoScript.SetScoreBoard(array);
         playerInfoScript.SavePlayer();
     }
