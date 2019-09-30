@@ -15,7 +15,7 @@ public class ScoreBoard : MonoBehaviour
     {
         playerInfoScript = PlayerInfo.GetComponent<PlayerInfo>();
         playerInfoScript.LoadPlayer();
-       //SetInitialScoreBoardValues();
+        SetInitialScoreBoardValues();
         SettingTextValues();
     }
 
