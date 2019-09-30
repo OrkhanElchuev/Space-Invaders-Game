@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
             StopCoroutine(shootingCoroutine);
         }
     }
-
+    
     private void DisablePlayerComponents()
     {
         GetComponent<SpriteRenderer>().enabled = false;

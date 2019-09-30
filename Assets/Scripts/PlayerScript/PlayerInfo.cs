@@ -29,7 +29,7 @@ public class PlayerInfo : MonoBehaviour
     {
         SaveSystem.SavePlayer(this);
     }
-
+    
     public void LoadPlayer()
     {
         PlayerData data = SaveSystem.LoadPlayer();
