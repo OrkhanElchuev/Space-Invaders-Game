@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject deathVFXObject;
     [SerializeField] GameObject sceneLoaderObject;
     private float durationOfExplosion = 0.4f;
-    
+
     // Player configuration variables
     private int movingSpeedOfPlayer = 25;
     private int playerHealthPoints = 4;
@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     private Transform HealthBar;
     [SerializeField] GameObject PlayerInfo;
     private GameStatus gameStatus;
-    
+
     // Camera Configuration Variables
     private float xMin;
     private float xMax;
@@ -130,11 +130,6 @@ public class Player : MonoBehaviour
         {
             laserShootingPeriod /= 1.2f;
         }
-        else
-        {
-            // If attack speed is max, consider the next ones as IncreaseScore 
-            IncreaseScore();
-        }
     }
 
     // Increase number of Lasers from "WeaponPowerUp"
@@ -176,6 +171,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    // When destroyed degrade player current upgrades by one 
+    private void DegradePlayer()
+    {
+        if (numberOfLasers > 1)
+        {
+            numberOfLasers--;
+        }
+        if (laserShootingPeriod < 0.3f)
+        {
+            laserShootingPeriod *= 1.2f;
+        }
+    }
+
     // On collision of enemy or enemy bullet with player
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -188,6 +196,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            DegradePlayer();
             playerHealthPoints--;
             DisablePlayerComponents();
             // If shooting is pressed before the player is dead

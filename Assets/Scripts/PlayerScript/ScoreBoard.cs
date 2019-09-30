@@ -40,6 +40,7 @@ public class ScoreBoard : MonoBehaviour
         int[] newArray = new int[7];
         int[] fixedFinalArray = new int[6];
 
+        // Fill up newArray with values from scoreBoard
         for (int i = 0; i < array.Length; i++)
         {
             newArray[i] = array[i];
