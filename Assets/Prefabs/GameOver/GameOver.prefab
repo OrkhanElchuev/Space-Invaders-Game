@@ -45,4 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInfo: {fileID: 7220506856800032461, guid: d25d23fc96d1442e09d437dc6fa50b92,
     type: 3}
-  loadScene: {fileID: 0}
+  loadScene: {fileID: 2061041538719494278, guid: 5b1139ad65e423f4fa2b793f0f80073b,
+    type: 3}

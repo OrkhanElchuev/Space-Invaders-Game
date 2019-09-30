@@ -63,7 +63,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 18332
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 839d2d64e359f794fb82308463c08912, type: 2}
   m_sharedMaterial: {fileID: -5941840842279350027, guid: 839d2d64e359f794fb82308463c08912,
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 3768278401455725410}
-    characterCount: 5
+    characterCount: 1
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -512,7 +512,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7100531067258657968, guid: 9f6849cc9cb35430bbb327845bb2c541,
+          type: 3}
         m_MethodName: LoadHomeScene
         m_Mode: 1
         m_Arguments:
