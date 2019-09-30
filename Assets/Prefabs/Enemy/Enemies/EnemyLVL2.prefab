@@ -95,13 +95,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60199d832d403164283425e1cf454942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealthPoints: 300
+  enemyHealthPoints: 400
   scoreValue: 200
   minPeriodBetweenShots: 1
   maxPeriodBetweenShots: 3.5
   enemyLaserObject: {fileID: 5155953065652748526, guid: 818c65c8ce394e14b89e3cbcdee9093e,
     type: 3}
-  laserSpeed: 8
+  laserSpeed: 10
   deathVFX: {fileID: 8646174394457154511, guid: 0ea61792a639b974e805b18ac4cdbcaf,
     type: 3}
   powerUpObject: {fileID: 450916139189441257, guid: a9efdf5cd5804e648ba498fa2b6053b7,
