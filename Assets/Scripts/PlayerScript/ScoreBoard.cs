@@ -15,9 +15,7 @@ public class ScoreBoard : MonoBehaviour
     {
         playerInfoScript = PlayerInfo.GetComponent<PlayerInfo>();
         playerInfoScript.LoadPlayer();
-
-        //SetInitialScoreBoardValues();
-        UpdateScoreBoard();
+       // SetInitialScoreBoardValues();
         SettingTextValues();
     }
 
@@ -31,43 +29,10 @@ public class ScoreBoard : MonoBehaviour
         }
     }
 
-    // Update score board 
-    private void UpdateScoreBoard()
-    {
-        // Initialize arrays and set current score value to local variable
-        int scoreValue = playerInfoScript.GetScore();
-        int[] array = playerInfoScript.GetScoreBoard();
-        int[] newArray = new int[7];
-        int[] fixedFinalArray = new int[6];
-
-        // Fill up newArray with values from scoreBoard
-        for (int i = 0; i < array.Length; i++)
-        {
-            newArray[i] = array[i];
-        }
-
-        // Assign current score to the last index of array
-        newArray[newArray.Length - 1] = scoreValue;
-        // Sort array in descending order
-        Array.Sort(newArray);
-        Array.Reverse(newArray);
-
-        // Fill up final array with first 10 values of sorted newArray  
-        for (int i = 0; i < fixedFinalArray.Length; i++)
-        {
-            fixedFinalArray[i] = newArray[i];
-        }
-
-        // Reset the values in scoreboard
-        playerInfoScript.SetScoreBoard(fixedFinalArray);
-        playerInfoScript.SetScore(0);
-        playerInfoScript.SavePlayer();
-    }
-
     // Create list of predefined values for scoreboard
     private void SetInitialScoreBoardValues()
     {
-        int[] array = { 225300, 152900, 72300, 35000, 15100, 5900 };
+        int[] array = { 888, 550, 420, 350, 251, 120 };
         playerInfoScript.SetScoreBoard(array);
         playerInfoScript.SavePlayer();
     }
