@@ -63,7 +63,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The safety of universe is in your hands
+  m_text: The safety of the universe is in your hands
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 839d2d64e359f794fb82308463c08912, type: 2}
   m_sharedMaterial: {fileID: -5941840842279350027, guid: 839d2d64e359f794fb82308463c08912,
@@ -133,10 +133,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 159755171}
-    characterCount: 39
+    characterCount: 43
     spriteCount: 0
-    spaceCount: 7
-    wordCount: 8
+    spaceCount: 8
+    wordCount: 9
     linkCount: 0
     lineCount: 1
     pageCount: 1
