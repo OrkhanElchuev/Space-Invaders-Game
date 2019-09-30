@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     private float durationOfExplosion = 0.4f;
 
     // Player configuration variables
-    private int movingSpeedOfPlayer = 25;
+    private int movingSpeedOfPlayer = 18;
     private int playerHealthPoints = 4;
     private int maxHealthPoints = 5;
     private Transform HealthBar;
