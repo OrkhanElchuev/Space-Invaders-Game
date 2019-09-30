@@ -11,6 +11,8 @@ public class GameOver : MonoBehaviour
     private GameObject gameOverMenuCanvas;
     private TextMeshProUGUI scoreText;
     [SerializeField] SceneLoader loadScene;
+
+    
     void Start()
     {
         gameOverMenuCanvas = transform.parent.Find("GameOverMenuCanvas").gameObject;
@@ -52,6 +54,7 @@ public class GameOver : MonoBehaviour
         playerInfo.SavePlayer();
     }
 
+    // When home button pressed, update scoreboard
     public void LoadHomeScene()
     {
         playerInfo.LoadPlayer();

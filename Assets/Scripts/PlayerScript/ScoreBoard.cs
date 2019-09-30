@@ -15,7 +15,7 @@ public class ScoreBoard : MonoBehaviour
     {
         playerInfoScript = PlayerInfo.GetComponent<PlayerInfo>();
         playerInfoScript.LoadPlayer();
-       // SetInitialScoreBoardValues();
+       //SetInitialScoreBoardValues();
         SettingTextValues();
     }
 
@@ -32,7 +32,7 @@ public class ScoreBoard : MonoBehaviour
     // Create list of predefined values for scoreboard
     private void SetInitialScoreBoardValues()
     {
-        int[] array = { 888, 550, 420, 350, 251, 120 };
+        int[] array = { 252500, 175400, 95200, 54300, 34200, 7800 };
         playerInfoScript.SetScoreBoard(array);
         playerInfoScript.SavePlayer();
     }
