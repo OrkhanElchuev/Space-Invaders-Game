@@ -2,7 +2,7 @@
 public class PlayerData
 {
     private int score;
-    private int[] scoreBoardPlayerDataArr = new int[10];
+    private int[] scoreBoardPlayerDataArr = new int[6];
 
     public int GetScorePlayerData()
     {

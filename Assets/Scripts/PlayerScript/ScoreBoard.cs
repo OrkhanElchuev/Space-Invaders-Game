@@ -35,8 +35,8 @@ public class ScoreBoard : MonoBehaviour
         //
         int value = playerInfoScript.GetScore();
         int[] array = playerInfoScript.GetScoreBoard();
-        int[] newArray = new int[11];
-        int[] fixedFinalArray = new int[10];
+        int[] newArray = new int[7];
+        int[] fixedFinalArray = new int[6];
 
         for (int i = 0; i < array.Length; i++)
         {
@@ -64,7 +64,7 @@ public class ScoreBoard : MonoBehaviour
     // Create list of predefined values for scoreboard
        private void SetInitialScoreBoardValues()
     {
-        int[] array = { 225300, 195400, 152900, 11500, 75400, 52300, 35000, 25700, 15100, 5900 };
+        int[] array = { 225300, 152900, 52300, 35000, 15100, 5900};
         playerInfoScript.SetScoreBoard(array);
         playerInfoScript.SavePlayer();
     }

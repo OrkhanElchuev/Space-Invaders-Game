@@ -4,7 +4,7 @@ using System;
 public class PlayerInfo : MonoBehaviour
 {
     private int score;
-    private int[] scoreBoardArray = new int[10];
+    private int[] scoreBoardArray = new int[6];
 
     public void SetScoreBoard(int[] newScoreBoardArray)
     {
