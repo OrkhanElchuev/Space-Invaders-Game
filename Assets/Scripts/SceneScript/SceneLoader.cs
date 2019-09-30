@@ -25,6 +25,10 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("ScoreBoard");
     }
 
+    public void LoadPowerUpSceneMenu()
+    {
+        SceneManager.LoadScene("PowerUpInformation");
+    }
 
     // Quit the application 
     public void Quit()
