@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
     private void IncreaseAttackSpeed()
     {
         // Limit max attack speed
-        float maxAttackSShootingPeriod = 0.07f;
+        float maxAttackSShootingPeriod = 0.1f;
         if (laserShootingPeriod > maxAttackSShootingPeriod)
         {
             laserShootingPeriod /= 1.2f;
