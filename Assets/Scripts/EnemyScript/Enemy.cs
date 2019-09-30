@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class Enemy : MonoBehaviour
     [Header("PowerUps")]
     [SerializeField] GameObject powerUpObject;
     private string[] powerUpsArray = { "HealthPowerUp", "AttackSpeedPowerUp", "ScorePowerUp", "WeaponPowerUp" };
-
 
     // Start is called before the first frame update
     void Start()
@@ -94,20 +94,48 @@ public class Enemy : MonoBehaviour
         powerUpScript.SetPowerUpType(powerUpsArray[randomPowerUpType]);
     }
 
+    private void BossDestroyed()
+    {
+        // Add score value to score field
+        FindObjectOfType<GameStatus>().AddToScore(scoreValue);
+        // Make boss invisible after it is killed
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<PolygonCollider2D>().enabled = false;
+        GetComponent<Enemy>().enabled = false;
+        // When boss destroyed create explosion effect
+        GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
+        Destroy(explosion, durationOfExplosion);
+    }
+
+    // Load win menu
+    public void LoadGameFinished()
+    {
+        SceneManager.LoadScene("GameFinished");
+    }
+
     // Destroy the enemy object
     private void DestroyEnemy()
     {
-        int probabilityOfPowerUp = Random.Range(1, 101);
-        // 10 percent probability of dropping power up
-        if (probabilityOfPowerUp <= 10)
+        // If final boss is killed load win menu after delay
+        if (gameObject.tag == "Boss")
         {
-            DropPowerUp();
+            BossDestroyed();
+            Invoke("LoadGameFinished", 2.5f);
         }
-        // Add score value to score field
-        FindObjectOfType<GameStatus>().AddToScore(scoreValue);
-        Destroy(gameObject);
-        // When enemy destroyed create explosion effect
-        GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
-        Destroy(explosion, durationOfExplosion);
+        else
+        {
+            int probabilityOfPowerUp = Random.Range(1, 101);
+            // 10 percent probability of dropping power up
+            if (probabilityOfPowerUp <= 10)
+            {
+                DropPowerUp();
+            }
+            // Add score value to score field
+            FindObjectOfType<GameStatus>().AddToScore(scoreValue);
+            Destroy(gameObject);
+            // When enemy destroyed create explosion effect
+            GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
+            Destroy(explosion, durationOfExplosion);
+        }
     }
 }

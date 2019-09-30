@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 28902723164058230}
   m_Layer: 9
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60199d832d403164283425e1cf454942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealthPoints: 50000
+  enemyHealthPoints: 100
   scoreValue: 25000
   minPeriodBetweenShots: 0.1
   maxPeriodBetweenShots: 1.5
