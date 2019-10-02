@@ -89,7 +89,8 @@ public class Enemy : MonoBehaviour
     {
         // Randomly get power up type
         int randomPowerUpType = Random.Range(0, 4);
-        GameObject powerUp = Instantiate(powerUpObject, transform.position, Quaternion.identity);
+        GameObject powerUp = Instantiate(powerUpObject,
+        transform.position, Quaternion.identity);
         PowerUps powerUpScript = powerUp.GetComponent<PowerUps>();
         powerUpScript.SetPowerUpType(powerUpsArray[randomPowerUpType]);
     }

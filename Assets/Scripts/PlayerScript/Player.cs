@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
             StopCoroutine(shootingCoroutine);
         }
     }
-    
+
     private void DisablePlayerComponents()
     {
         GetComponent<SpriteRenderer>().enabled = false;
@@ -291,7 +291,7 @@ public class Player : MonoBehaviour
                     InstantiateLaser("rightCorner", 0.5f);
                     break;
             }
-            // Create a delay between next shot
+            // Create a delay between  next shot
             yield return new WaitForSeconds(laserShootingPeriod);
         }
     }
