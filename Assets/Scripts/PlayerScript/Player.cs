@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private Transform HealthBar;
     [SerializeField] GameObject PlayerInfo;
     private GameStatus gameStatus;
+    private bool canShoot = true;
 
     // Camera Configuration Variables
     private float xMin;
@@ -74,8 +75,11 @@ public class Player : MonoBehaviour
     private void Shoot()
     {
         // When space keyboard is pressed start shooting
-        if (Input.GetButtonDown("Attack"))
-        {
+        if (Input.GetButtonDown("Attack") && canShoot == true)
+        {   
+            canShoot = false;
+            // After a delay(shooting Period) enable shooting
+            Invoke("EnableShooting", laserShootingPeriod);
             shootingCoroutine = StartCoroutine(ShootContinuously());
         }
         // If keyboard is released stop shooting
@@ -256,6 +260,12 @@ public class Player : MonoBehaviour
                     Quaternion.identity) as GameObject;
         // Setting velocity for laser
         laser.GetComponent<PlayerLaser>().CreateItself(laserSpeed, direction);
+    }
+
+    // Enable shooting 
+    private void EnableShooting()
+    {
+        canShoot = true;
     }
 
     // To shoot while the key is pressed and deal with number of Lasers player has
