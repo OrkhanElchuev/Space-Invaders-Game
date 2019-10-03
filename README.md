@@ -23,7 +23,7 @@
 - Enjoy the game!
 ## Game Description
 ### Game Keyboards
-- WASD for movement
+- WASD and Arrows for movement
 - Space for shooting
 - ESC (escape) for Pause
 ### Known bugs
