@@ -10,7 +10,7 @@
 ### For Windows User
 - Open Folder Named "Game" in Space-Invader-Game repository.
 - Proceed to InstallerWindows Folder.
-- Click on Space-Invader-Setup(x86) and download.
+- Click on SpaceInvadersSetup.exe and download.
 - Most probably you will face a warning message. Just Right click on warning and click "Save".
 - Now you have an installer file! Open it.
 - Windows Defender will prevent running it. Click "More Info" and Click "Run Anyway".
