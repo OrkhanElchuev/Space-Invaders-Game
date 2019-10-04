@@ -27,7 +27,7 @@
 - Space for shooting
 - ESC (escape) for Pause
 ### Known bugs
-- If enemy is destroyed near the edge of screen you will not be able to pick up the PowerUp(If there is a drop)
+- When chaotically pressing shooting button it might start shooting by itself even after releasing button(happens not always)
 ## Contacts 
 - E-mail address orkhan.elchuev@gmail.com
 - https://github.com/OrkhanElchuev/Space-Invader-Game
