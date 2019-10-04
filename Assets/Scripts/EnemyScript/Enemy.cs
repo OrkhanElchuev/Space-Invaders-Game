@@ -89,8 +89,26 @@ public class Enemy : MonoBehaviour
     {
         // Randomly get power up type
         int randomPowerUpType = Random.Range(0, 4);
+        // PowerUp instantiation
         GameObject powerUp = Instantiate(powerUpObject,
-        transform.position, Quaternion.identity);
+        transform.position, Quaternion.identity) as GameObject;
+        // PowerUp size 
+        RectTransform rt = (RectTransform)powerUp.transform;
+        // Check the position of enemy carrying powerup
+        Vector3 set = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 
+        Screen.height / 2, Camera.main.nearClipPlane));
+        // If object is in the right side
+        if (powerUp.transform.position.x > set.x - rt.rect.width / 2)
+        {
+            powerUp.transform.position = new Vector3(set.x - rt.rect.width / 2,
+             powerUp.transform.position.y, powerUp.transform.position.z);
+        }
+        // If object is in the left side
+        else if (powerUp.transform.position.x < -set.x + rt.rect.width / 2)
+        {
+            powerUp.transform.position = new Vector3(-set.x + rt.rect.width / 2,
+             powerUp.transform.position.y, powerUp.transform.position.z);
+        }
         PowerUps powerUpScript = powerUp.GetComponent<PowerUps>();
         powerUpScript.SetPowerUpType(powerUpsArray[randomPowerUpType]);
     }
