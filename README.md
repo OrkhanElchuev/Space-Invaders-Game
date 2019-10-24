@@ -32,5 +32,5 @@
 - E-mail address orkhan.elchuev@gmail.com
 - https://github.com/OrkhanElchuev/Space-Invader-Game
 ## Aknowledgements
-- https://www.dafont.com/de/
-- https://www.kenney.nl/assets?s=space+shooter
+- [dafont](https://www.dafont.com/de/)
+- [kenneyAssets](https://www.kenney.nl/assets?s=space+shooter)
