@@ -10,7 +10,7 @@
 ### For Windows User
 - Open Folder Named "Game" in Space-Invader-Game repository.
 - Proceed to InstallerWindows Folder.
-- Click on Space-Invader-Setup(x86) and download.
+- Click on SpaceInvadersSetup.exe and download.
 - Most probably you will face a warning message. Just Right click on warning and click "Save".
 - Now you have an installer file! Open it.
 - Windows Defender will prevent running it. Click "More Info" and Click "Run Anyway".
@@ -32,5 +32,5 @@
 - E-mail address orkhan.elchuev@gmail.com
 - https://github.com/OrkhanElchuev/Space-Invader-Game
 ## Aknowledgements
-- https://www.dafont.com/de/
-- https://www.kenney.nl/assets?s=space+shooter
+- [dafont](https://www.dafont.com/de/)
+- [kenneyAssets](https://www.kenney.nl/assets?s=space+shooter)
