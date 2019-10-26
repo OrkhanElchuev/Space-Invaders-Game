@@ -1,7 +1,9 @@
 # Space-Invader-Game
-## Space Invader Game for Coding Contest from IT-talents in partnership with Airbus.
-
-### Tools used while developing this project
+## Space Invader Game for Coding Contest from [IT-talents](https://www.it-talents.de/) in partnership with [Airbus](https://www.airbus.com/).
+## Screenshots
+![](Images/MainMenu.png)
+![](Images/GamePlay.png)
+## Tools used while developing this project
 - Unity.
 - Visual Studio Code. Coding in C# Programming Language.
 - GitBash.
