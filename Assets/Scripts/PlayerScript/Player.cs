@@ -19,11 +19,11 @@ public class Player : MonoBehaviour
     private float durationOfExplosion = 0.4f;
 
     // Player configuration variables
+    [SerializeField] GameObject PlayerInfo;
     private int movingSpeedOfPlayer = 18;
     private int playerHealthPoints = 4;
     private int maxHealthPoints = 5;
     private Transform HealthBar;
-    [SerializeField] GameObject PlayerInfo;
     private GameStatus gameStatus;
     private bool canShoot = true;
 
@@ -89,6 +89,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Disabling player components 
     private void DisablePlayerComponents()
     {
         GetComponent<SpriteRenderer>().enabled = false;
