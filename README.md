@@ -4,7 +4,7 @@
 ![](Images/MainMenu.png)
 ![](Images/GamePlay.png)
 ## To Play the Game 
-If you want to play the game on your browser, please visit [SpaceInvaders](https://orkhan.itch.io/space-invaders)
+If you want to play the game on your browser, please visit [Space Invaders](https://orkhan.itch.io/space-invaders)
 It is a desktop game and controllers are not adjsted for mobile gaming, so make sure to open on a PC or Laptop.
 ## Tools used while developing this project
 - Unity.
