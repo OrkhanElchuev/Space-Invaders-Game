@@ -36,6 +36,6 @@ It is a desktop game and controllers are not adjsted for mobile gaming, so make 
 ## Contacts 
 - E-mail address orkhan.elchuev@gmail.com
 - https://github.com/OrkhanElchuev/Space-Invader-Game
-## Aknowledgements
+## Acknowledgements
 - [dafont](https://www.dafont.com/de/)
 - [kenneyAssets](https://www.kenney.nl/assets?s=space+shooter)
