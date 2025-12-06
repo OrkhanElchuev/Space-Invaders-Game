@@ -33,21 +33,21 @@ public class PlayerLaser : MonoBehaviour
         {
             // Straight Laser
             case "straight":
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+                GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, laserSpeed);
                 break;
             // Tilted to the left 
             case "left":
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-2, laserSpeed);
+                GetComponent<Rigidbody2D>().linearVelocity = new Vector2(-2, laserSpeed);
                 break;
             // Tilted to the right 
             case "right":
-                GetComponent<Rigidbody2D>().velocity = new Vector2(2, laserSpeed);
+                GetComponent<Rigidbody2D>().linearVelocity = new Vector2(2, laserSpeed);
                 break;
             case "leftCorner":
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-4, laserSpeed);
+                GetComponent<Rigidbody2D>().linearVelocity = new Vector2(-4, laserSpeed);
                 break;
             case "rightCorner":
-                GetComponent<Rigidbody2D>().velocity = new Vector2(4, laserSpeed);
+                GetComponent<Rigidbody2D>().linearVelocity = new Vector2(4, laserSpeed);
                 break;
 
         }
