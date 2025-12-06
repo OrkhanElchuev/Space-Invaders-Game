@@ -50,7 +50,7 @@ public class PowerUps : MonoBehaviour
     private void MovePowerUp()
     {
         // Moving downward 
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0, -powerUpSpeed);
+        GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, -powerUpSpeed);
     }
 
     // Update is called once per frame

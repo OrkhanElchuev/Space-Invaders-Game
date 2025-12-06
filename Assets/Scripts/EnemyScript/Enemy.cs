@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
         GameObject enemyLaser = Instantiate(enemyLaserObject,
             transform.position, Quaternion.identity) as GameObject;
         // -laserSpeed to shoot downwards
-        enemyLaser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -laserSpeed);
+        enemyLaser.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, -laserSpeed);
     }
 
     // Decrease Health of Enemy
